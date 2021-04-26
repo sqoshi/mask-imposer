@@ -24,6 +24,8 @@
 
 It is only an example of a `workflow`. Images may be cropped in other way. 
 
+Standard size of image in celebA align dataset is a 178x218. Example uses a 64x64 crop.
+
 For example, we could exclude hair of people and focus straightly on face.
 [images no hair](https://www.researchgate.net/figure/Examples-of-3-datasets-a-CelebA-dataset-after-aligning-b-fer2013-dataset-from-left-to_fig2_343778164)
 
