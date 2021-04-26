@@ -32,7 +32,7 @@ torch.manual_seed(manualSeed)
 
 # Root directory for dataset
 dataroot = "~/datasets/image/celeba/img_align_celeba"
-csv_landmarks = "/home/piotr/Documents/face-mask-detection-pytorch/dataset/list_landmarks_align_celeba.txt"
+csv_landmarks = "/home/piotr/Documents/mask-imposer/pytorch/dataset/list_landmarks_align_celeba.txt"
 
 workers = 2
 batch_size = 1
