@@ -1,6 +1,7 @@
 import sys
 from bz2 import BZ2File
 from http.client import HTTPException
+from logging import Logger
 from tarfile import CompressionError
 from urllib.error import HTTPError, URLError
 from urllib.request import urlretrieve
@@ -8,7 +9,6 @@ from urllib.request import urlretrieve
 from termcolor import colored
 
 from mask_imposer.beautifiers import TerminalProgressBar
-from mask_imposer.colored_logger import ColoredLogger
 
 
 def _unpack_bz2(filepath: str) -> str:
@@ -30,9 +30,9 @@ def _accepted_download() -> bool:
 
 
 def download_predictor(
-    logger: ColoredLogger,
+    logger: Logger,
     url: str = "http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2",
-    predictor_fp: str = "shape_predictor_68_face_landmarks.bz2",
+    predictor_fp: str = "shape_predictor_68_face_landmarks.bz2"
 ) -> str:
     """Downloads default dlib shape predictor (68-landmark)"""
 
