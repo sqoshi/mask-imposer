@@ -1,4 +1,4 @@
-from logging import Logger, DEBUG, StreamHandler, Formatter
+from logging import DEBUG, Formatter, Logger, StreamHandler
 from typing import Any
 
 from termcolor import colored

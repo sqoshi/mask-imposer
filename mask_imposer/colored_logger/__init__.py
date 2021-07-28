@@ -1,1 +1,1 @@
-from .logger import get_configured_logger, ColoredLogger
+from .logger import ColoredLogger, get_configured_logger

@@ -1,6 +1,6 @@
 from bz2 import BZ2File
 from http.client import HTTPException
-from urllib.error import URLError, HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import urlretrieve
 
 from termcolor import colored

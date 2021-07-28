@@ -1,10 +1,9 @@
 import os
+from logging import getLogger
 from unittest import TestCase
 from unittest.mock import patch
 
 from mask_imposer.detector.download import download_predictor
-
-from logging import getLogger
 
 
 def get_directory_files(path):

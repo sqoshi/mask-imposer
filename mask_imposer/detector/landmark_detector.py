@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from _dlib_pybind11 import shape_predictor, get_frontal_face_detector
+from _dlib_pybind11 import get_frontal_face_detector, shape_predictor
 
 from mask_imposer.colored_logger import ColoredLogger
 from mask_imposer.detector.download import download_predictor
