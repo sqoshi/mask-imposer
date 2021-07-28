@@ -10,4 +10,6 @@ class Detector:
     def __init__(self, images: List[str], predictor_fp: Optional[str], logger: ColoredLogger):
         self.images = images
         self.detector = get_frontal_face_detector()
-        self.predictor = shape_predictor(predictor_fp if predictor_fp else download_predictor(logger))
+        if not predictor_fp:
+            predictor_fp = download_predictor(logger)
+        self.predictor = shape_predictor(predictor_fp)
