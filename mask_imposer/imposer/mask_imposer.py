@@ -50,8 +50,14 @@ class Imposer:
         # alpha_s = scaled_mask_img[:, :, 3] / 255.0
         # alpha_l = 1.0 - alpha_s
         # for c in range(0, 3):
-        print(scaled_mask_img.shape)
-        print(scaled_mask_img[:limit_w, :limit_h].shape)
+        print("Shape scaled part {}".format(scaled_mask_img[:limit_w, :limit_h].shape))
+        print("Shape target part {}".format(target_image.img[left_top_point.y:, left_top_point.x:].shape))
+        if scaled_mask_img[:limit_w, :limit_h].shape != target_image.img[left_top_point.y:, left_top_point.x:].shape:
+            print("Target size replace box is different ! , sizes:")
+            for v1, v2 in zip(scaled_mask_img[:limit_w, :limit_h].shape,
+                              target_image.img[left_top_point.y:, left_top_point.x:].shape):
+                print("Shall be reducted by {} from right / bottom".format(v2 - v1))
+                #todo: finish that
         cv2.imshow("Cut mask", scaled_mask_img[:limit_w, :limit_h])
         cv2.imshow("Face replacement", target_image.img[left_top_point.y:, left_top_point.x:])
         cv2.waitKey(0)
