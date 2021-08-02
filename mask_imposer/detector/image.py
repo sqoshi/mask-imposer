@@ -1,14 +1,16 @@
 from typing import Optional
 
 from _dlib_pybind11 import rectangle
-from cv2 import cvtColor, COLOR_BGR2GRAY, imread
+from cv2 import cvtColor, COLOR_BGR2GRAY, imread, COLOR_BGR2BGRA
 
 
 class Image:
     """Hold image data."""
 
-    def __init__(self, filepath: str) -> None:
-        self.img = imread(filepath)
+    def __init__(self, filepath: str, no_background: bool = False) -> None:
+        self.img = imread(filepath, -1)  # if no_background else imread(filepath)
+        if self.img.shape[-1] == 3:
+            self.img = self.converted_rgba()
         self.__name: str = filepath
         self._gray_img: Optional[cvtColor] = None
         self._rect: Optional[rectangle] = None
@@ -28,3 +30,6 @@ class Image:
             height, width, _ = self.img.shape
             self._rect = rectangle(left=0, top=0, right=width, bottom=height)
         return self._rect
+
+    def converted_rgba(self) -> cvtColor:
+        return cvtColor(self.img, COLOR_BGR2BGRA)

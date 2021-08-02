@@ -16,7 +16,7 @@ class MaskImage(Image):
 
         :rtype: object
         """
-        super().__init__(filepath)
+        super().__init__(filepath, no_background=True)
         self._point_map = PointerMap()
 
     def resized(self, width: int, height: int, show: bool = False) -> Tuple[ndarray, PointerMap]:
