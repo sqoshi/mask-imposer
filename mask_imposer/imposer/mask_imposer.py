@@ -39,52 +39,48 @@ class Imposer:
 
     @staticmethod
     def get_shape_surpluses(target, overlay) -> Tuple[Any, Any]:
-        return overlay.shape[0] - target.shape[0], overlay.shape[1] - target.shape[1]
+        return target.shape[0] - overlay.shape[0], target.shape[1] - overlay.shape[1]
 
-    def paste_mask_on(self, target_image: Image, landmarks_dict):
-        scaled_overlay, pointer_map = self.mask.scale_to(landmarks_dict)
+    @staticmethod
+    def strategic_paste(target_image, mask_img, h_surplus, w_surplus, left_top_point, h_mask_limit, w_mask_limit):
+        alpha_s = mask_img[:h_mask_limit, :w_mask_limit, 3] / 255.0
+        alpha_l = 1.0 - alpha_s
+
+        for c in range(0, 3):
+            only_mask = alpha_s * mask_img[:h_mask_limit, :w_mask_limit, c]
+
+            if not h_surplus and not w_surplus:
+                target_image.img[left_top_point.y:, left_top_point.x:, c] = \
+                    only_mask + alpha_l * target_image.img[left_top_point.y:, left_top_point.x:, c]
+            elif h_surplus and not w_surplus:
+                target_image.img[left_top_point.y:-h_surplus, left_top_point.x:, c] = \
+                    only_mask + alpha_l * target_image.img[left_top_point.y:-h_surplus, left_top_point.x:, c]
+            elif not h_surplus and w_surplus:
+                target_image.img[left_top_point.y:, left_top_point.x:-w_surplus, c] = \
+                    only_mask + alpha_l * target_image.img[left_top_point.y:, left_top_point.x:-w_surplus, c]
+            elif h_surplus and w_surplus:
+                target_image.img[left_top_point.y:-h_surplus, left_top_point.x:-w_surplus, c] = \
+                    only_mask + alpha_l * target_image.img[left_top_point.y:-h_surplus, left_top_point.x:-w_surplus, c]
+
+    def paste_mask(self, target_image: Image, landmarks_dict):
+        scaled_mask_img, pointer_map = self.mask.scale_to(landmarks_dict)
         left_top_point = self.determine_goal_cords(landmarks_dict, pointer_map)
 
         target_h, target_w, _ = target_image.img.shape
         replace_box = target_image.img[left_top_point.y:, left_top_point.x:]
-        limit_w, limit_h, _ = replace_box.shape
+        mask_limit_h, mask_limit_w, _ = replace_box.shape
 
-        print("Shape scaled part {}".format(scaled_overlay[:limit_w, :limit_h].shape))
-        print("Shape target part {}".format(replace_box.shape))
-        h_sp, w_sp, _ = target_image.img[left_top_point.y:, left_top_point.x:].shape
-        # h_sp, w_sp = self.get_shape_surpluses(replace_box, scaled_overlay[:limit_w, :limit_h])
-        # if not h_sp:
-        #     h_sp, _, _ = target_image.img[left_top_point.y:, left_top_point.x:].shape
-        # if not w_sp:
-        #     _, w_sp, _ = target_image.img[left_top_point.y:, left_top_point.x:].shape
-        print(h_sp, w_sp)
+        h_surplus, w_surplus = self.get_shape_surpluses(replace_box, scaled_mask_img[:mask_limit_h, :mask_limit_w])
 
-        cv2.imshow("Cut mask", scaled_overlay[:limit_w, :limit_h])
-        cv2.imshow("Face replacement", target_image.img[left_top_point.y:, left_top_point.x:])
+        self.strategic_paste(target_image, scaled_mask_img,
+                             h_surplus, w_surplus, left_top_point,
+                             mask_limit_h, mask_limit_w)
+
+        cv2.imshow("Result", target_image.img)
         cv2.waitKey(0)
-
-        alpha_s = scaled_overlay[:limit_w, :limit_h, 3] / 255.0
-        alpha_l = 1.0 - alpha_s
-        try:
-            for c in range(0, 3):
-                # if not h_sp and w_sp:
-                print(target_image.img[left_top_point.y:, left_top_point.x:, c].shape)
-                print(target_image.img[left_top_point.y:h_sp, left_top_point.x:w_sp, c].shape)
-                target_image.img[left_top_point.y:h_sp, left_top_point.x:w_sp, c] = \
-                    alpha_s * scaled_overlay[:limit_w, :limit_h, c] + \
-                    alpha_l * target_image.img[left_top_point.y:-h_sp, left_top_point.x:w_sp, c]
-                # elif w_sp and not h_sp:
-                #     target_image.img[left_top_point.y:, left_top_point.x:, c] = \
-                #         alpha_s * scaled_overlay[:limit_w, :limit_h, c] + \
-                #         alpha_l * target_image.img[left_top_point.y:, left_top_point.x:, c]
-            cv2.imshow("MaskedFace", target_image.img)
-            cv2.waitKey(0)
-        except:
-            pass
 
     def impose(self):
         for image_fp, landmarks_dict in self._landmarks.items():
             if "masked" not in image_fp:
-                print(image_fp)
                 img_obj = Image(image_fp)
-                self.paste_mask_on(img_obj, landmarks_dict)
+                self.paste_mask(img_obj, landmarks_dict)
