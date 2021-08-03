@@ -7,8 +7,8 @@ from cv2 import COLOR_BGR2BGRA, COLOR_BGR2GRAY, cvtColor, imread
 class Image:
     """Hold image data."""
 
-    def __init__(self, filepath: str, no_background: bool = False) -> None:
-        self.img = imread(filepath, -1)  # if no_background else imread(filepath)
+    def __init__(self, filepath: str) -> None:
+        self.img = imread(filepath, -1)
         if self.img.shape[-1] == 3:
             self.img = self.converted_rgba()
         self.__name: str = filepath

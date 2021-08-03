@@ -1,4 +1,4 @@
-from typing import Any, Dict, Tuple, Union
+from typing import Dict, Tuple
 
 import cv2
 from numpy import ndarray
@@ -17,7 +17,7 @@ class MaskImage(Image):
 
         :rtype: object
         """
-        super().__init__(filepath, no_background=True)
+        super().__init__(filepath)
         self._point_map = PointerMap()
 
     def resized(self, width: int, height: int, show: bool = False) -> Tuple[ndarray, PointerMap]:

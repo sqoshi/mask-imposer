@@ -133,7 +133,7 @@ class PointerMap:
         """
         new_points = {}
         for k, v in self._points.items():
-            new_points[k] = Pointer(*self._points[k].scaled(x_scale, y_scale))
+            new_points[k] = Pointer(*v.scaled(x_scale, y_scale))
         return new_points
 
     def new_scaled_map(  # type:ignore
