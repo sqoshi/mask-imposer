@@ -1,16 +1,17 @@
-from typing import Dict, Union, Tuple, Any
+from typing import Any, Dict, Tuple, Union
 
 import cv2
 from numpy import ndarray
 
 from mask_imposer.detector.image import Image
-from mask_imposer.imposer.mask_pointers import PointerMap, Pointer
+from mask_imposer.imposer.mask_pointers import Pointer, PointerMap
 
 
 class MaskImage(Image):
     def __init__(
             self,  # tmp solution
-            filepath: str = "/home/piotr/Documents/bsc-thesis/mask-imposer/mask_imposer/imposer/mask_image.png"
+            filepath: str = "/home/piotr/Documents/"
+                            "bsc-thesis/mask-imposer/mask_imposer/imposer/mask_image.png"
     ) -> None:
         """
 
@@ -41,7 +42,9 @@ class MaskImage(Image):
 
         return new_im, self._point_map.new_scaled_map(x_scale, y_scale)
 
-    def scale_to(self, landmarks_dictionary: Dict[int, Tuple[int, int]]) -> Tuple[ndarray, PointerMap]:
+    def scale_to(
+            self, landmarks_dictionary: Dict[int, Tuple[int, int]]
+    ) -> Tuple[ndarray, PointerMap]:
         """ Computes distances to which mask image should be resized and resizes it.
 
         Accordingly to detected landmarks.

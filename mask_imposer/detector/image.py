@@ -1,7 +1,7 @@
 from typing import Optional
 
 from _dlib_pybind11 import rectangle
-from cv2 import cvtColor, COLOR_BGR2GRAY, imread, COLOR_BGR2BGRA
+from cv2 import COLOR_BGR2BGRA, COLOR_BGR2GRAY, cvtColor, imread
 
 
 class Image:
