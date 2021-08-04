@@ -11,7 +11,7 @@ from numpy import ndarray, shape
 from termcolor import colored, cprint
 
 from mask_imposer.imposer.mask_pointers import Pointer, PointerMap
-from ..definitions import ImageFormat
+from ..definitions import ImageFormat, Size
 
 from ..detector.image import Image
 from .mask_image import MaskImage
@@ -29,16 +29,16 @@ def get_name_from(path: str):
 
 detections_dict = Dict[str, Dict[int, Tuple[int, int]]]
 
-Size = namedtuple("Size", ["w", "h"])
-
 
 class Imposer:
     """Class overlay mask image on front face according to detected landmarks."""
 
-    def __init__(self, landmarks: detections_dict, output_dir: str, output_format: ImageFormat, logger: Logger) -> None:
+    def __init__(self, landmarks: detections_dict, output_dir: str, output_format: ImageFormat, logger: Logger,
+                 draw_landmarks: bool = False) -> None:
         self._logger = logger
         self._output_dir = output_dir
         self._output_format = output_format
+        self.should_draw_landmarks = draw_landmarks
         self._landmarks = landmarks
         self.mask = MaskImage()
 
@@ -73,7 +73,6 @@ class Imposer:
 
         alpha_s = mask_img[:mask_size.h, :mask_size.w, 3] / 255.0
         alpha_l = 1.0 - alpha_s
-
         # channels handling
         for c in range(0, 3):
             only_mask = alpha_s * mask_img[:mask_size.h, :mask_size.w, c]
@@ -91,6 +90,15 @@ class Imposer:
                         only_mask + alpha_l * target_image.img[left_top_point.y: -surplus.h,
                                               left_top_point.x: -surplus.w, c])
 
+    def draw_landmarks(self, landmarks_dict: Dict[int, Tuple[int, int]], image: Image, left_top_point: Pointer) -> None:
+        if self.should_draw_landmarks:
+            for k, v in landmarks_dict.items():
+                try:
+                    image.img = cv2.circle(image.img, v, 2, (255, 0, 0), 2)
+                except cv2.error:
+                    pass
+            image.img = cv2.circle(image.img, (left_top_point.x, left_top_point.y), 2, (255, 0, 0), 2)
+
     def paste_mask(self, target_image: Image, landmarks_dict: Dict[int, Tuple[int, int]]) -> None:
         """Pastes mask image on target in place according to detected landmarks on original image
 
@@ -107,7 +115,7 @@ class Imposer:
         )
 
         self.cut_paste(target_image, scaled_mask_img, surplus, left_top_point, mask_limits)
-
+        self.draw_landmarks(landmarks_dict, target_image, left_top_point)
         cv2.imshow("Result", target_image.img)
         cv2.waitKey(0)
 
@@ -121,10 +129,12 @@ class Imposer:
                 os.makedirs(self._output_dir)
                 break
             except FileExistsError:
-                response = input(colored("Would you like to empty existing directory?", "red"))
+                response = input(colored("Would you like to empty existing directory?\n", "red"))
                 cprint(f" - {self._output_dir}", "red")
                 if response.lower() in {"y", "yes", ""}:
                     shutil.rmtree(self._output_dir)
+                elif response.lower() == "new":
+                    self._output_dir = input(colored("Input new output directory name?\n", "green"))
                 else:
                     self._output_dir = self._output_dir + f"{int(time.time())}"
 

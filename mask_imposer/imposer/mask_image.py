@@ -13,10 +13,6 @@ class MaskImage(Image):
             filepath: str = "/home/piotr/Documents/"
                             "bsc-thesis/mask-imposer/mask_imposer/imposer/mask_image.png"
     ) -> None:
-        """
-
-        :rtype: object
-        """
         super().__init__(filepath)
         self._point_map = PointerMap()
 
