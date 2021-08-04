@@ -20,6 +20,7 @@ setup(
         "wheel==0.36.2",
         "termcolor==1.1.0",
         "dlib==19.22.0",
-        "progressbar==2.5"
+        "progressbar==2.5",
+        "opencv-python>=4.5.3.5"
     ],
 )

@@ -7,7 +7,8 @@ import numpy as np
 from _dlib_pybind11 import (full_object_detection, get_frontal_face_detector,
                             shape_predictor)
 
-from mask_imposer.detector.download import download_predictor
+from .download import download_predictor
+from .image import Image
 
 
 def rect_to_bb(rect: dlib.rectangle) -> Tuple[Any, Any, Any, Any]:
@@ -35,32 +36,6 @@ def _shape_to_dict(shape: full_object_detection) -> Dict[int, Tuple[int, int]]:
     if not result:
         raise NotImplementedError()  # raise landmarks not found
     return result
-
-
-class Image:
-    """Hold image data."""
-
-    def __init__(self, filepath: str) -> None:
-        self.img = cv2.imread(filepath)
-        self.__name: str = filepath
-        self._gray_img: Optional[cv2.cvtColor] = None
-        self._rect: Optional[dlib.rectangle] = None
-
-    def __str__(self) -> str:
-        return self.__name
-
-    def get_gray_img(self) -> cv2.cvtColor:
-        """Creates if not yet created image in gray scale."""
-        if self._gray_img is None:
-            self._gray_img = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
-        return self._gray_img
-
-    def get_rectangle(self) -> dlib.rectangle:
-        """Creates if not yet created dlib rectangle of within whole image."""
-        if self._rect is None:
-            height, width, _ = self.img.shape
-            self._rect = dlib.rectangle(left=0, top=0, right=width, bottom=height)
-        return self._rect
 
 
 class Detector:
