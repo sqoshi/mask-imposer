@@ -15,8 +15,10 @@ def _parse_args() -> Namespace:
     parser.add_argument("--output-format", choices=list(ImageFormat), type=ImageFormat, default=ImageFormat.png,
                         help="Output images format.")
     parser.add_argument("--shape-predictor", type=str, default=None, help="Path to shape predictor.")
-    parser.add_argument("--show-samples", type=bool, default=False, help="Show sample after detection.")
-    parser.add_argument("--draw-landmarks", type=bool, default=False, help="Draw circles on detected landmarks cords.")
+    parser.add_argument("--show-samples", action="store_true",
+                        help="Show sample after detection.")
+    parser.add_argument("--draw-landmarks", default=False, action="store_true",
+                        help="Draw circles on detected landmarks cords.")
     parser.add_argument("--detect-face-boxes", type=bool, default=False,
                         help="Before landmark prediction detect face box.")
     return parser.parse_args()
@@ -33,7 +35,7 @@ def main():
     inspector = Inspector(logger)
     inspector.inspect(args.input_dir)
 
-    detector = Detector(inspector.get_images(), args.shape_predictor, args.detect_face_boxes, args.show_samples, logger)
+    detector = Detector(inspector.get_images(), args.shape_predictor, args.detect_face_boxes, False, logger)
     detector.detect()
     # detector.save(args.output_dir, args.output_format)
 
