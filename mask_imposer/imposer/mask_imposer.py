@@ -10,7 +10,7 @@ from numpy import ndarray, shape
 from termcolor import colored
 
 from mask_imposer.imposer.mask_pointers import Pointer, PointerMap
-from ..definitions import ImageFormat, Output, Size
+from ..definitions import ImageFormat, Output, Size, Improvements
 
 from ..detector.image import Image
 from .mask_image import MaskImage
@@ -36,13 +36,14 @@ class Imposer:
         self,
         landmarks: detections_dict,
         output: Output,
-        logger: Logger,
-        draw_landmarks: bool = False,
+        improvements: Improvements,
+        logger: Logger
     ) -> None:
         self._logger = logger
         self._output_dir: str = output.directory
         self._output_format: ImageFormat = output.format
-        self._should_draw_landmarks = draw_landmarks
+        self._should_draw_landmarks = improvements.draw_landmarks
+        self._show_samples = improvements.show_samples
         self._landmarks = landmarks
         self._mask = MaskImage()
 
@@ -168,8 +169,9 @@ class Imposer:
             target_image, scaled_mask_img, surplus, left_top_point, mask_limits
         )
         self._draw_landmarks(landmarks_dict, target_image, left_top_point)
-        cv2.imshow("Result", target_image.img)
-        cv2.waitKey(0)
+        if self._show_samples:
+            cv2.imshow("Result", target_image.img)
+            cv2.waitKey(0)
 
     def _determine_safe_output_dir(self) -> None:
         """Check if output dir exists and ask for permission to empty it or create a new one."""
