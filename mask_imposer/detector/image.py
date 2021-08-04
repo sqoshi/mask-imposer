@@ -32,4 +32,5 @@ class Image:
         return self._rect
 
     def converted_rgba(self) -> cvtColor:
+        """Converts 3 channel image to 4 channel."""
         return cvtColor(self.img, COLOR_BGR2BGRA)

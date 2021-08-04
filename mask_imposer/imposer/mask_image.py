@@ -8,18 +8,13 @@ from mask_imposer.imposer.mask_pointers import Pointer, PointerMap
 
 
 class MaskImage(Image):
-    def __init__(
-            self,  # tmp solution
-            filepath: str = "/home/piotr/Documents/"
-                            "bsc-thesis/mask-imposer/mask_imposer/imposer/mask_image.png"
-    ) -> None:
+    def __init__(self, filepath: str = "mask_imposer/imposer/mask_image.png") -> None:
         super().__init__(filepath)
         self._point_map = PointerMap()
 
     def resized(self, width: int, height: int, show: bool = False) -> Tuple[ndarray, PointerMap]:
-        """
-            We measure distance between opposite points left/right and top/bottom.
-            On Mask and target image and scale mask to make this distances equal.
+        """We measure distance between opposite points left/right and top/bottom
+        on mask and target image and scale mask to make this distances equal.
         """
         x_diff = abs(self._point_map.get_left_point().x - self._point_map.get_right_point().x)
         y_diff = abs(self._point_map.get_bottom_point().y - self._point_map.get_top_point().y)

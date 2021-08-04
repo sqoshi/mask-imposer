@@ -36,8 +36,6 @@ class PointerMap:
 
     def __init__(self, input_points: Optional[Dict[int, Pointer]] = None) -> None:
         """Pointers are hardcoded to a default image."""
-        # [2, 9, 16, 29]  # L B R T
-
         # hardcoded by standard mask image.
         self._left_index = 2
         self._right_index = 16
@@ -51,7 +49,7 @@ class PointerMap:
                 self._top_index: Pointer(250, 10)  # or 30
             }
         else:
-            self._points: Dict[int, Pointer] = input_points
+            self._points = input_points
 
     def get_included_indexes(self) -> List[int]:
         """List of used landmarks indexes (according to readme landmarks scheme)."""
@@ -124,7 +122,7 @@ class PointerMap:
         """
         new_points = {}
         for k, v in self._points.items():
-            new_points[k] = Pointer(*self._points[k].scaled(x_scale, y_scale))
+            new_points[k] = Pointer(*v.scaled(x_scale, y_scale))
         return new_points
 
     def new_scaled_map(  # type:ignore

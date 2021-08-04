@@ -1,7 +1,7 @@
 from argparse import ArgumentParser, Namespace
 
 from mask_imposer.colored_logger import get_configured_logger
-from mask_imposer.definitions import ImageFormat
+from mask_imposer.definitions import ImageFormat, Output
 from mask_imposer.detector.landmark_detector import Detector
 from mask_imposer.imposer.mask_imposer import Imposer
 from mask_imposer.input_inspector import Inspector
@@ -35,5 +35,5 @@ def main():
     detector.detect()
     # detector.save(args.output_dir, args.output_format)
 
-    imposer = Imposer(detector.get_landmarks(), args.output_dir, args.output_format, logger)
+    imposer = Imposer(detector.get_landmarks(), Output(args.output_dir, args.output_format), logger)
     imposer.impose()
