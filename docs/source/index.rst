@@ -18,3 +18,13 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. mdinclude:: ../../readme.md
+
+.. image:: ../.readme_media/68landmarks.png
+.. image:: ../.readme_media/points.png
+.. image:: ../.readme_media/lines.png
+.. image:: ../.readme_media/example_landmarks.png
+.. image:: ../.readme_media/example_res2.png
+.. image:: ../.readme_media/example_pre.png
+.. image:: ../.readme_media/example_res.png
