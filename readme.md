@@ -13,6 +13,7 @@ Tool to overlay fake face masks.
 - [Usage](#usage)
     - [Options](#options)
     - [Workflow](#workflow)
+- [Documentation](#documentation)
 
 ## Introduction
 
@@ -106,5 +107,16 @@ mim INPUT_DIR --option argument
 
    ![example_res.png](docs/.readme_media/example_res.png)
 
+## Documentation
+Generation:
+```
+1. nano docs/source/conf.py && cd docs 
+2. sphinx-apidoc -o source ../mask_imposer
+3. make html
+```
 
-
+Local usage:
+```shell
+cd docs
+make html
+```
