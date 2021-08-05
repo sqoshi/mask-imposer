@@ -13,6 +13,7 @@ Tool to overlay fake face masks.
 - [Usage](#usage)
     - [Options](#options)
     - [Workflow](#workflow)
+- [Documentation](#documentation)
 
 ## Introduction
 
@@ -106,5 +107,9 @@ mim INPUT_DIR --option argument
 
    ![example_res.png](docs/.readme_media/example_res.png)
 
+## Documentation
 
-
+```shell
+cd docs
+make html
+```
