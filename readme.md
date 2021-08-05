@@ -14,6 +14,8 @@ Tool to overlay fake face masks.
     - [Options](#options)
     - [Workflow](#workflow)
 - [Documentation](#documentation)
+- [Docker](#docker)
+- [Technologies](#technologies)
 
 ## Introduction
 
@@ -108,7 +110,11 @@ mim INPUT_DIR --option argument
    ![example_res.png](docs/.readme_media/example_res.png)
 
 ## Documentation
+
+[Sphinx tutorial](https://betterprogramming.pub/auto-documenting-a-python-project-using-sphinx-8878f9ddc6e9)
+
 Generation:
+
 ```
 1. nano docs/source/conf.py && cd docs 
 2. sphinx-apidoc -o source ../mask_imposer
@@ -116,7 +122,26 @@ Generation:
 ```
 
 Local usage:
+
 ```shell
 cd docs
 make html
 ```
+
+## Docker
+
+For now after calling:
+
+```shell
+docker-compose up -d
+```
+
+user is available to read sphinx documentation under [http://localhost:8100/](http://localhost:8100/).
+
+## Technologies
+
+- python3.8
+  - opencv
+  - dlib
+- sphinx
+- docker20.10

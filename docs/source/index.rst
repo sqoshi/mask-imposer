@@ -1,15 +1,16 @@
 .. MaskImposer documentation master file, created by
-   sphinx-quickstart on Thu Aug  5 20:32:26 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+sphinx-quickstart on Thu Aug  5 20:32:26 2021.
+You can adapt this file completely to your liking, but it should at least
+contain the root `toctree` directive.
 
 Welcome to MaskImposer's documentation!
 =======================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
 
+   modules
 
 
 Indices and tables
@@ -21,6 +22,9 @@ Indices and tables
 
 .. mdinclude:: ../../readme.md
 
+Images in appearance order
+==================
+
 .. image:: ../.readme_media/68landmarks.png
 .. image:: ../.readme_media/points.png
 .. image:: ../.readme_media/lines.png
@@ -28,3 +32,4 @@ Indices and tables
 .. image:: ../.readme_media/example_res2.png
 .. image:: ../.readme_media/example_pre.png
 .. image:: ../.readme_media/example_res.png
+
