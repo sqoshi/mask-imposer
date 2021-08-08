@@ -3,14 +3,15 @@ from typing import Dict, Tuple
 import cv2
 from numpy import ndarray
 
+from mask_imposer.definitions import MaskSet
 from mask_imposer.detector.image import Image
 from mask_imposer.imposer.mask_pointers import Pointer, PointerMap
 
 
 class MaskImage(Image):
-    def __init__(self, filepath: str = "mask_imposer/imposer/mask_image.png") -> None:
-        super().__init__(filepath)
-        self._point_map = PointerMap()
+    def __init__(self, mask_set: MaskSet) -> None:
+        super().__init__(mask_set.img_path)
+        self._point_map = PointerMap(mask_set.coords_path)
 
     def resized(self, width: int, height: int, show: bool = False) -> Tuple[ndarray, PointerMap]:
         """We measure distance between opposite points left/right and top/bottom

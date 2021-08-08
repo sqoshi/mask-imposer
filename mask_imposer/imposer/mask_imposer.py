@@ -10,7 +10,7 @@ from numpy import ndarray, shape
 from termcolor import colored
 
 from mask_imposer.imposer.mask_pointers import Pointer, PointerMap
-from ..definitions import ImageFormat, Output, Size, Improvements
+from ..definitions import ImageFormat, Output, Size, Improvements, MaskSet
 
 from ..detector.image import Image
 from .mask_image import MaskImage
@@ -36,6 +36,7 @@ class Imposer:
         self,
         landmarks: detections_dict,
         output: Output,
+        mask_set: MaskSet,
         improvements: Improvements,
         logger: Logger
     ) -> None:
@@ -45,7 +46,7 @@ class Imposer:
         self._should_draw_landmarks = improvements.draw_landmarks
         self._show_samples = improvements.show_samples
         self._landmarks = landmarks
-        self._mask = MaskImage()
+        self._mask = MaskImage(mask_set)
 
     @staticmethod
     def _fit_left_top_coords(

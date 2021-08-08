@@ -1,7 +1,7 @@
 from argparse import ArgumentParser, Namespace
 
 from mask_imposer.colored_logger import get_configured_logger
-from mask_imposer.definitions import ImageFormat, Output, Improvements
+from mask_imposer.definitions import ImageFormat, Output, Improvements, MaskSet
 from mask_imposer.detector.landmark_detector import Detector
 from mask_imposer.imposer.mask_imposer import Imposer
 from mask_imposer.input_inspector import Inspector
@@ -18,8 +18,12 @@ def _parse_args() -> Namespace:
     parser.add_argument("--show-samples", action="store_true",
                         help="Show sample after detection.")
     parser.add_argument("--draw-landmarks", default=False, action="store_true",
-                        help="Draw circles on detected landmarks cords.")
+                        help="Draw circles on detected landmarks coords.")
     parser.add_argument("--detect-face-boxes", type=bool, default=False,
+                        help="Before landmark prediction detect face box.")
+    parser.add_argument("--mask-coords", type=str, default="mask_imposer/imposer/mask_cords.json",
+                        help="Before landmark prediction detect face box.")
+    parser.add_argument("--mask-img", type=str, default="mask_imposer/imposer/mask_image.png",
                         help="Before landmark prediction detect face box.")
     return parser.parse_args()
 
@@ -31,6 +35,7 @@ def main():
     # logger.disabled = True
     args = _parse_args()
     improvements = Improvements(args.show_samples, args.draw_landmarks)
+    mask_set = MaskSet(args.mask_img, args.mask_coords)
 
     inspector = Inspector(logger)
     inspector.inspect(args.input_dir)
@@ -39,5 +44,6 @@ def main():
     detector.detect()
     # detector.save(args.output_dir, args.output_format)
 
-    imposer = Imposer(detector.get_landmarks(), Output(args.output_dir, args.output_format), improvements, logger)
+    imposer = Imposer(detector.get_landmarks(), Output(args.output_dir, args.output_format),
+                      mask_set, improvements, logger)
     imposer.impose()

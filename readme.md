@@ -89,7 +89,7 @@ mim INPUT_DIR --option argument
 | --output-format | ❌ | png | Output images format. |
 | --shape-predictor | ❌ | None | Path to shape predictor. |
 | --show-samples | ❌ | False | Show sample after detection. |
-| --draw-landmarks | ❌ | False | Draw circles on detected landmarks cords. |
+| --draw-landmarks | ❌ | False | Draw circles on detected landmarks coords. |
 | --detect-face-boxes | ❌ | False | Before landmark prediction detect face box. |
 
 ### Workflow
