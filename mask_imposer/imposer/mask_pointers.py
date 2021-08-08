@@ -47,7 +47,7 @@ def _create_map(fp: str) -> Dict[int, Pointer]:
     new_map = {}
     data = _read_pointer_map_from(fp)
     _check_keys(data)
-    for k, v in data:
+    for k, v in data.items():
         new_map[int(k)] = Pointer(*v)
     return new_map
 

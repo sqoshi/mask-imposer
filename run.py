@@ -21,9 +21,9 @@ def _parse_args() -> Namespace:
                         help="Draw circles on detected landmarks coords.")
     parser.add_argument("--detect-face-boxes", type=bool, default=False,
                         help="Before landmark prediction detect face box.")
-    parser.add_argument("--mask-coords", type=str, default="mask_imposer/imposer/mask_cords.json",
+    parser.add_argument("--mask-coords", type=str, default="mask_imposer/bundled/set_01/mask_coords.json",
                         help="Before landmark prediction detect face box.")
-    parser.add_argument("--mask-img", type=str, default="mask_imposer/imposer/mask_image.png",
+    parser.add_argument("--mask-img", type=str, default="mask_imposer/bundled/set_01/mask_image.png",
                         help="Before landmark prediction detect face box.")
     return parser.parse_args()
 
@@ -36,6 +36,11 @@ def main():
     args = _parse_args()
     improvements = Improvements(args.show_samples, args.draw_landmarks)
     mask_set = MaskSet(args.mask_img, args.mask_coords)
+    # img = cv2.imread(args.mask_img)
+    # cv2.imshow("example", img)
+    # cv2.waitKey(0)
+    # exit()
+    output = Output(args.output_dir, args.output_format)
 
     inspector = Inspector(logger)
     inspector.inspect(args.input_dir)
@@ -44,6 +49,5 @@ def main():
     detector.detect()
     # detector.save(args.output_dir, args.output_format)
 
-    imposer = Imposer(detector.get_landmarks(), Output(args.output_dir, args.output_format),
-                      mask_set, improvements, logger)
+    imposer = Imposer(detector.get_landmarks(), output, mask_set, improvements, logger)
     imposer.impose()
