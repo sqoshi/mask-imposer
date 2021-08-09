@@ -2,11 +2,14 @@
 
 Tool to overlay fake face masks.
 
+Project is a part of series related with my Bachelor of Science Thesis research.
+
 ## Table of contents
 
 - [Introduction](#introduction)
 - [General](#general)
     - [Inspection](#input-inspection)
+    - [Imposition](#imposition)
     - [Detection](#detection)
         - [Important landmarks](#important-landmarks)
     - [Imposition](#imposition)
