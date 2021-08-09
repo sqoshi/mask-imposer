@@ -11,9 +11,12 @@ Project is a part of series related with my Bachelor of Science Thesis research.
     - [Inspection](#input-inspection)
     - [Imposition](#imposition)
     - [Detection](#detection)
+        - [Important landmarks](#important-landmarks)
+    - [Imposition](#imposition)
 - [Installation](#installation)
 - [Usage](#usage)
     - [Options](#options)
+    - [Custom mask](#custom-mask)
     - [Workflow](#workflow)
 - [Documentation](#documentation)
 
@@ -39,6 +42,8 @@ found [here]("http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2").
 
 ![68landmarks.png](docs/.readme_media/68landmarks.png)
 
+#### Important landmarks
+
 For now program requires only 4 of them:
 
 - left - _2_
@@ -48,14 +53,15 @@ For now program requires only 4 of them:
 
 ### `Imposition`
 
-As stayed in [previous paragraph](#detection) program use only few landmarks.
+As stayed in [previous paragraph](#important-landmarks) program use only few landmarks.
 
 After landmarks have been detected, program reading mask image with some hardcoded coordinates (X,Y) responding to all
-indexes stated in [previous paragraph](#detection).
+indexes stated in [previous paragraph](#important-landmarks).
 
 ![mask.png](docs/.readme_media/points.png)
 
-Red dots are points responding to left, right, top and bottom landmark defined in [previous paragraph](#detection).
+Red dots are points responding to left, right, top and bottom landmark defined
+in [previous paragraph](#important-landmarks).
 
 In next state program computes distances between opposite dots in vertical and horizontal way.
 
@@ -91,8 +97,44 @@ mim INPUT_DIR --option argument
 | --output-format | ❌ | png | Output images format. |
 | --shape-predictor | ❌ | None | Path to shape predictor. |
 | --show-samples | ❌ | False | Show sample after detection. |
-| --draw-landmarks | ❌ | False | Draw circles on detected landmarks cords. |
+| --draw-landmarks | ❌ | False | Draw circles on detected landmarks coords. |
 | --detect-face-boxes | ❌ | False | Before landmark prediction detect face box. |
+| --mask-coords | ❌ | bundled_mask | Custom mask characteristic `[2,9,16,29]` landmarks coordinates json filepath. |
+| --mask-img | ❌ | bundled_coords | Custom mask image filepath. |
+
+### Custom Mask
+
+Mask maybe inputted via terminal by using two flags `--mask-img` and `--mask-coords`.
+
+Using custom mask requires inputting a path to mask image and a path to json
+with [important landmarks](#important-landmarks).
+
+Image requirements:
+
+- Mask must fit image size as much as only possible.
+- Mask image must have not got background. Background maybe removed simply by online tools
+  like [removebg](https://www.remove.bg/)
+
+Example:
+
+![example image](mask_imposer/bundled/set_02/mask_image.png)
+
+Coordinates file requirements:
+
+- Keys must match [important landmarks](#important-landmarks)
+- Values must be a 2-elements list and respond to `(X, Y)` order.
+- Point (0,0) is in left top corner of image.
+
+Example `mask_coords.json`:
+
+```json
+{
+  "2": [ 15, 50],
+  "9": [185, 310],
+  "16": [365, 50],
+  "29": [185, 20]
+}
+```
 
 ### Workflow
 
@@ -110,7 +152,9 @@ mim INPUT_DIR --option argument
    ![example_res.png](docs/.readme_media/example_res.png)
 
 ## Documentation
+
 Generation:
+
 ```
 1. nano docs/source/conf.py && cd docs 
 2. sphinx-apidoc -o source ../mask_imposer
@@ -118,6 +162,7 @@ Generation:
 ```
 
 Local usage:
+
 ```shell
 cd docs
 make html

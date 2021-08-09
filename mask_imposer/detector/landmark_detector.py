@@ -6,6 +6,7 @@ import dlib
 import numpy as np
 from _dlib_pybind11 import (full_object_detection, get_frontal_face_detector,
                             shape_predictor)
+from numpy.typing import NDArray
 
 from .download import download_predictor
 from .image import Image
@@ -20,7 +21,7 @@ def rect_to_bb(rect: dlib.rectangle) -> Tuple[Any, Any, Any, Any]:
     return x, y, w, h
 
 
-def shape_to_np(shape: full_object_detection, dtype: str = "int") -> np.array:
+def shape_to_np(shape: full_object_detection, dtype: str = "int") -> NDArray:  # type:ignore
     """Transform shape object to array of landmarks cords."""
     coords = np.zeros((68, 2), dtype=dtype)
     for i in range(0, 68):

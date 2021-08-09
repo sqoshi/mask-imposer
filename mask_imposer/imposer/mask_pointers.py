@@ -1,3 +1,4 @@
+import json
 from typing import Dict, List, Optional, Tuple, Union
 
 from termcolor import colored
@@ -31,24 +32,45 @@ class Pointer:
         )
 
 
+def _read_pointer_map_from(filepath: str) -> Dict[str, List[int]]:
+    """Read json with 4 characteristic landmarks."""
+    with open(filepath) as f:
+        return json.load(f)
+
+
+def _check_keys(data: Dict[str, List[int]]) -> None:
+    """Check if keys in file are valid keys=numbers."""
+    for k in data.keys():
+        if not k.isdigit():
+            raise NotImplementedError(
+                "Coordinates mask keys must be numbers!"
+                " [2-left,16-right,9-bottom,29-top"
+            )
+
+
+def _create_map(fp: str) -> Dict[int, Pointer]:
+    """Reads map frm filepath, check keys and transforms to a pointer map."""
+    new_map = {}
+    data = _read_pointer_map_from(fp)
+    _check_keys(data)
+    for k, v in data.items():
+        new_map[int(k)] = Pointer(*v)
+    return new_map
+
+
 class PointerMap:
     """Mapping pointers to characteristic mask points."""
 
-    def __init__(self, input_points: Optional[Dict[int, Pointer]] = None) -> None:
+    def __init__(self, input_points: Optional[Union[Dict[int, Pointer], str]] = None) -> None:
         """Pointers are hardcoded to a default image."""
         # hardcoded by standard mask image.
         self._left_index = 2
         self._right_index = 16
         self._top_index = 29
         self._bottom_index = 9
-        if not input_points:
-            self._points: Dict[int, Pointer] = {
-                self._left_index: Pointer(20, 90),
-                self._bottom_index: Pointer(250, 465),
-                self._right_index: Pointer(475, 90),
-                self._top_index: Pointer(250, 10)  # or 30
-            }
-        else:
+        if isinstance(input_points, str):
+            self._points = _create_map(input_points)
+        elif isinstance(input_points, dict):
             self._points = input_points
 
     def get_included_indexes(self) -> List[int]:

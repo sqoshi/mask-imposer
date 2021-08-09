@@ -131,3 +131,5 @@ dmypy.json
 .idea/
 shape_predictor_68_face_landmarks.bz2
 shape_predictor_68_face_landmarks.dat
+results
+results.*

@@ -6,12 +6,12 @@ from os.path import join
 from typing import Any, Dict, Tuple, Union
 
 import cv2
-from numpy import ndarray, shape
+from numpy.typing import NDArray
 from termcolor import colored
 
 from mask_imposer.imposer.mask_pointers import Pointer, PointerMap
-from ..definitions import ImageFormat, Output, Size, Improvements
 
+from ..definitions import ImageFormat, Improvements, MaskSet, Output, Size
 from ..detector.image import Image
 from .mask_image import MaskImage
 
@@ -36,6 +36,7 @@ class Imposer:
         self,
         landmarks: detections_dict,
         output: Output,
+        mask_set: MaskSet,
         improvements: Improvements,
         logger: Logger
     ) -> None:
@@ -45,7 +46,7 @@ class Imposer:
         self._should_draw_landmarks = improvements.draw_landmarks
         self._show_samples = improvements.show_samples
         self._landmarks = landmarks
-        self._mask = MaskImage()
+        self._mask = MaskImage(mask_set)
 
     @staticmethod
     def _fit_left_top_coords(
@@ -62,7 +63,9 @@ class Imposer:
         return Pointer(int(x), int(y))
 
     @staticmethod
-    def _compute_size_surpluses(target: shape, overlay: shape) -> Tuple[Any, Any]:
+    def _compute_size_surpluses(
+            target: NDArray, overlay: NDArray  # type:ignore
+    ) -> Tuple[Any, Any]:
         """Get differences between width and height limit of to-replace box
         from original image and mask.
         """
@@ -71,7 +74,7 @@ class Imposer:
     @staticmethod
     def _cut_paste(
         target_image: Image,
-        mask_img: ndarray,
+        mask_img: NDArray,  # type:ignore
         surplus: Size,
         left_top_point: Pointer,
         mask_size: Size,
