@@ -2,12 +2,14 @@
 
 Tool to overlay fake face masks.
 
+Project is a part of series related with my Bachelor of Science Thesis research.
+
 ## Table of contents
 
 - [Introduction](#introduction)
 - [General](#general)
     - [Inspection](#input-inspection)
-    - [Imposion](#imposion)
+    - [Imposition](#imposition)
     - [Detection](#detection)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -44,7 +46,7 @@ For now program requires only 4 of them:
 - top - _29_
 - bottom - _9_
 
-### `Imposion`
+### `Imposition`
 
 As stayed in [previous paragraph](#detection) program use only few landmarks.
 
