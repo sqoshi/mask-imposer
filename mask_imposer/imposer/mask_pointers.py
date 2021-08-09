@@ -32,7 +32,7 @@ class Pointer:
         )
 
 
-def _read_pointer_map_from(filepath: str):
+def _read_pointer_map_from(filepath: str) -> Dict[str, List[int]]:
     with open(filepath) as f:
         return json.load(f)
 
@@ -40,7 +40,10 @@ def _read_pointer_map_from(filepath: str):
 def _check_keys(data: Dict[str, List[int]]) -> None:
     for k in data.keys():
         if not k.isdigit():
-            raise NotImplementedError("Coordinates mask keys must be numbers! [2-left,16-right,9-bottom,29-top")
+            raise NotImplementedError(
+                "Coordinates mask keys must be numbers!"
+                " [2-left,16-right,9-bottom,29-top"
+            )
 
 
 def _create_map(fp: str) -> Dict[int, Pointer]:

@@ -1,7 +1,7 @@
 from typing import Dict, Tuple
 
 import cv2
-from numpy import ndarray
+from numpy.typing import NDArray
 
 from mask_imposer.definitions import MaskSet
 from mask_imposer.detector.image import Image
@@ -13,7 +13,9 @@ class MaskImage(Image):
         super().__init__(mask_set.img_path)
         self._point_map = PointerMap(mask_set.coords_path)
 
-    def resized(self, width: int, height: int, show: bool = False) -> Tuple[ndarray, PointerMap]:
+    def resized(
+            self, width: int, height: int, show: bool = False
+    ) -> Tuple[NDArray, PointerMap]:  # type:ignore
         """We measure distance between opposite points left/right and top/bottom
         on mask and target image and scale mask to make this distances equal.
         """
@@ -36,7 +38,7 @@ class MaskImage(Image):
 
     def scale_to(
             self, landmarks_dictionary: Dict[int, Tuple[int, int]]
-    ) -> Tuple[ndarray, PointerMap]:
+    ) -> Tuple[NDArray, PointerMap]:  # type:ignore
         """ Computes distances to which mask image should be resized and resizes it.
 
         Accordingly to detected landmarks.
