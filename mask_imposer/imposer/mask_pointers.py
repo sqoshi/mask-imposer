@@ -33,11 +33,13 @@ class Pointer:
 
 
 def _read_pointer_map_from(filepath: str) -> Dict[str, List[int]]:
+    """Read json with 4 characteristic landmarks."""
     with open(filepath) as f:
         return json.load(f)
 
 
 def _check_keys(data: Dict[str, List[int]]) -> None:
+    """Check if keys in file are valid keys=numbers."""
     for k in data.keys():
         if not k.isdigit():
             raise NotImplementedError(
@@ -47,6 +49,7 @@ def _check_keys(data: Dict[str, List[int]]) -> None:
 
 
 def _create_map(fp: str) -> Dict[int, Pointer]:
+    """Reads map frm filepath, check keys and transforms to a pointer map."""
     new_map = {}
     data = _read_pointer_map_from(fp)
     _check_keys(data)
