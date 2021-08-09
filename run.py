@@ -1,6 +1,7 @@
 from argparse import ArgumentParser, Namespace
 
 import cv2
+import numpy as np
 
 from mask_imposer.colored_logger import get_configured_logger
 from mask_imposer.definitions import ImageFormat, Output, Improvements, MaskSet
@@ -38,10 +39,28 @@ def main():
     args = _parse_args()
     improvements = Improvements(args.show_samples, args.draw_landmarks)
     mask_set = MaskSet(args.mask_img, args.mask_coords)
+
+    window = "Include Help"
+    img = cv2.imread(mask_set.img_path)
+    cv2.namedWindow(window)
+
+    def capture_event(event, x, y, flags, params):
+        if event == cv2.EVENT_LBUTTONDBLCLK:
+            cv2.circle(img, (x, y), int(img.shape[0] / 40), (255, 0, 0), -1)
+            print(x, y)
+
+    cv2.setMouseCallback(window, capture_event)
+
+    while True:
+        cv2.imshow(window, img)
+        if cv2.waitKey(1) == 13:
+            break
+    cv2.destroyAllWindows()
+
     # img = cv2.imread(args.mask_img)
     # cv2.imshow("example", img)
     # cv2.waitKey(0)
-    # exit()
+    exit()
     output = Output(args.output_dir, args.output_format)
 
     inspector = Inspector(logger)
