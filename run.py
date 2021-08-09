@@ -1,5 +1,7 @@
 from argparse import ArgumentParser, Namespace
 
+import cv2
+
 from mask_imposer.colored_logger import get_configured_logger
 from mask_imposer.definitions import ImageFormat, Output, Improvements, MaskSet
 from mask_imposer.detector.landmark_detector import Detector
@@ -22,9 +24,9 @@ def _parse_args() -> Namespace:
     parser.add_argument("--detect-face-boxes", type=bool, default=False,
                         help="Before landmark prediction detect face box.")
     parser.add_argument("--mask-coords", type=str, default="mask_imposer/bundled/set_01/mask_coords.json",
-                        help="Before landmark prediction detect face box.")
+                        help="Custom mask image path.")
     parser.add_argument("--mask-img", type=str, default="mask_imposer/bundled/set_01/mask_image.png",
-                        help="Before landmark prediction detect face box.")
+                        help="Custom mask characteristic [2,9,16,29] landmarks coordinates json filepath.")
     return parser.parse_args()
 
 
@@ -36,10 +38,10 @@ def main():
     args = _parse_args()
     improvements = Improvements(args.show_samples, args.draw_landmarks)
     mask_set = MaskSet(args.mask_img, args.mask_coords)
-    # img = cv2.imread(args.mask_img)
-    # cv2.imshow("example", img)
-    # cv2.waitKey(0)
-    # exit()
+    img = cv2.imread(args.mask_img)
+    cv2.imshow("example", img)
+    cv2.waitKey(0)
+    exit()
     output = Output(args.output_dir, args.output_format)
 
     inspector = Inspector(logger)
