@@ -15,7 +15,7 @@ class CoordinatesCollector:
         self.mask_img_path = mask_img_path
         self.img = cv2.imread(mask_img_path)
         self.candidates: List[List[int]] = []
-        self.mask_coords: Optional[Dict[int, List[int]]] = None
+        self.mask_coords: Optional[Dict[int, Pointer]] = None
 
     def _capture_event(
             self, event: cv2.cuda_Event, x: int, y: int,
@@ -40,7 +40,7 @@ class CoordinatesCollector:
                 cv2.waitKey(1)
                 break
 
-    def collect(self) -> Optional[Dict[int, List[int]]]:
+    def collect(self) -> Optional[Dict[int, Pointer]]:
         """Creates json with collected from clickable input coordinates."""
         self._logger.info("Collecting mask coordinates interactively.")
         cv2.namedWindow(self.window)
@@ -71,7 +71,7 @@ class CoordinatesCollector:
         )
         return response.lower() in {"y", "yes", ""}
 
-    def reset(self) -> Optional[Dict[int, List[int]]]:
+    def reset(self) -> Optional[Dict[int, Pointer]]:
         """Resets collector variables and collects coords once again."""
         self._logger.info("Mask coords collector has been reset.")
         self.mask_coords = None

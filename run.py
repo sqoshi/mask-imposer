@@ -56,9 +56,6 @@ def main():
 
     mask_set = _create_mask_set(args, logger)
 
-    cc = CoordinatesCollector(args.mask_img, logger)
-    cc.collect()
-
     output = Output(args.output_dir, args.output_format)
 
     inspector = Inspector(logger)
@@ -70,3 +67,5 @@ def main():
 
     imposer = Imposer(detector.get_landmarks(), output, mask_set, improvements, logger)
     imposer.impose()
+
+# todo : check if mask inputted via clicks working and add readme
