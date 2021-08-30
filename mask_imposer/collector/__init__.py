@@ -1,0 +1,1 @@
+from .coords_collector import CoordinatesCollector
