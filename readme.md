@@ -24,8 +24,8 @@ Project is a part of series related with my Bachelor of Science Thesis research.
 
 Mask imposer is a tool for overlaying face mask over human central faces.
 
-Application main purpose is to allow users to make fake datasets of people in face masks. Since there is no available
-free dataset, application is useful in machine or deep learning in classification/ recognition problems.
+Application main purpose is to make fake datasets of people in face masks. Since there is no available free dataset,
+application is useful in machine or deep learning in classification/ recognition problems.
 
 ## General
 
@@ -46,22 +46,20 @@ found [here]("http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2").
 
 For now program requires only 4 of them:
 
-- left - _2_
-- right - _16_
-- top - _29_
-- bottom - _9_
+- `left` - _2_
+- `right` - _16_
+- `top` - _29_
+- `bottom` - _9_
 
 ### `Imposition`
 
-As stayed in [previous paragraph](#important-landmarks) program use only few landmarks.
-
-After landmarks have been detected, program reading mask image with some hardcoded coordinates (X,Y) responding to all
-indexes stated in [previous paragraph](#important-landmarks).
+When landmarks have been detected, program is reading mask image with some hardcoded coordinates (X,Y) responding to all
+indexes mentioned in [previous paragraph](#important-landmarks).
 
 ![mask.png](docs/.readme_media/points.png)
 
-Red dots are points responding to left, right, top and bottom landmark defined
-in [previous paragraph](#important-landmarks).
+Red dots are points responding to *left*, *right*, *top* and *bottom* landmark defined
+[here](#important-landmarks).
 
 In next state program computes distances between opposite dots in vertical and horizontal way.
 
@@ -72,7 +70,7 @@ in target image.
 
 ![example_landmarks.png](docs/.readme_media/example_landmarks.png)
 
-For now protruding part of the face mask is being cut and result is saved in output directory (default=`results`).
+For now protruding part of the face mask is being cut and saved in output directory (default=`results`).
 
 ![example_res2.png](docs/.readme_media/example_res2.png)
 
@@ -99,15 +97,20 @@ mim INPUT_DIR --option argument
 | --show-samples | ❌ | False | Show sample after detection. |
 | --draw-landmarks | ❌ | False | Draw circles on detected landmarks coords. |
 | --detect-face-boxes | ❌ | False | Before landmark prediction detect face box. |
-| --mask-coords | ❌ | bundled_mask | Custom mask characteristic `[2,9,16,29]` landmarks coordinates json filepath. |
-| --mask-img | ❌ | bundled_coords | Custom mask image filepath. |
+| --use-bundled-mask | ❌ | 1 | Program offers some bundled (default) masks, choices (1,2) |
+| --mask-coords | ❌ | None | Custom mask characteristic `[2,9,16,29]` landmarks coordinates json filepath. |
+| --mask-img | ❌ | None | Custom mask image filepath. |
 
 ### Custom Mask
 
-Mask maybe inputted via terminal by using two flags `--mask-img` and `--mask-coords`.
+Mask maybe inputted via terminal by using flag `--mask-img`. Then mask image popup on the screen and program asks user
+to interactively mark characteristic points on displayed image.
 
-Using custom mask requires inputting a path to mask image and a path to json
-with [important landmarks](#important-landmarks).
+If flag `--mask-img` would be combined with `--mask-coords` then characteristic points will be read from inputted
+filepath.
+
+Using custom mask requires inputting a _path to mask image_ or _path to mask image and a path to json
+with [important landmarks](#important-landmarks)_.
 
 Image requirements:
 
@@ -129,10 +132,22 @@ Example `mask_coords.json`:
 
 ```json
 {
-  "2": [ 15, 50],
-  "9": [185, 310],
-  "16": [365, 50],
-  "29": [185, 20]
+  "2": [
+    15,
+    50
+  ],
+  "9": [
+    185,
+    310
+  ],
+  "16": [
+    365,
+    50
+  ],
+  "29": [
+    185,
+    20
+  ]
 }
 ```
 

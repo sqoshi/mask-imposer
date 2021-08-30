@@ -10,6 +10,7 @@ from mask_imposer.input_inspector import Inspector
 
 
 def _create_mask_set(args, logger: Logger) -> MaskSet:
+    """Determine importance of passed arguments in mask creation procedure."""
     if args.mask_img:
         if args.mask_coords:
             return MaskSet(args.mask_img, args.mask_coords)
@@ -34,7 +35,6 @@ def _parse_args() -> Namespace:
                         help="Draw circles on detected landmarks coords.")
     parser.add_argument("--detect-face-boxes", type=bool, default=False,
                         help="Before landmark prediction detect face box.")
-
     parser.add_argument("--mask-coords", type=str, default=None,
                         # "mask_imposer/bundled/set_01/mask_coords.json",
                         help="Custom mask image path.")
@@ -53,19 +53,12 @@ def main():
     # logger.disabled = True
     args = _parse_args()
     improvements = Improvements(args.show_samples, args.draw_landmarks)
-
     mask_set = _create_mask_set(args, logger)
-
     output = Output(args.output_dir, args.output_format)
-
     inspector = Inspector(logger)
     inspector.inspect(args.input_dir)
-
     detector = Detector(inspector.get_images(), args.shape_predictor, args.detect_face_boxes, False, logger)
     detector.detect()
     # detector.save(args.output_dir, args.output_format)
-
     imposer = Imposer(detector.get_landmarks(), output, mask_set, improvements, logger)
     imposer.impose()
-
-# todo : check if mask inputted via clicks working and add readme
