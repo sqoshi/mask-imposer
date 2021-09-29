@@ -1,3 +1,4 @@
+import os
 from argparse import ArgumentParser, Namespace
 from logging import Logger
 
@@ -15,9 +16,10 @@ def _create_mask_set(args, logger: Logger) -> MaskSet:
         if args.mask_coords:
             return MaskSet(args.mask_img, args.mask_coords)
         return MaskSet(args.mask_img, CoordinatesCollector(args.mask_img, logger).collect())
+    curr_fp = os.path.dirname(os.path.realpath(__file__))
     return MaskSet(
-        f"mask_imposer/bundled/set_0{args.use_bundled_mask}/mask_image.png",
-        f"mask_imposer/bundled/set_0{args.use_bundled_mask}/mask_coords.json"
+        os.path.join(curr_fp, f"mask_imposer/bundled/set_0{args.use_bundled_mask}/mask_image.png"),
+        os.path.join(curr_fp, f"mask_imposer/bundled/set_0{args.use_bundled_mask}/mask_coords.json")
     )
 
 
@@ -33,7 +35,7 @@ def _parse_args() -> Namespace:
                         help="Show sample after detection.")
     parser.add_argument("--draw-landmarks", default=False, action="store_true",
                         help="Draw circles on detected landmarks coords.")
-    parser.add_argument("--detect-face-boxes", type=bool, default=False,
+    parser.add_argument("--off-face-detection", action="store_true",
                         help="Before landmark prediction detect face box.")
     parser.add_argument("--mask-coords", type=str, default=None,
                         # "mask_imposer/bundled/set_01/mask_coords.json",
@@ -57,7 +59,7 @@ def main():
     output = Output(args.output_dir, args.output_format)
     inspector = Inspector(logger)
     inspector.inspect(args.input_dir)
-    detector = Detector(inspector.get_images(), args.shape_predictor, args.detect_face_boxes, False, logger)
+    detector = Detector(inspector.get_images(), args.shape_predictor, not args.off_face_detection, False, logger)
     detector.detect()
     # detector.save(args.output_dir, args.output_format)
     imposer = Imposer(detector.get_landmarks(), output, mask_set, improvements, logger)

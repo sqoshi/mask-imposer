@@ -79,7 +79,7 @@ class Detector:
         """Find the coordinates of rectangle in which face occurs."""
 
         if self._should_detect_face_rect:
-            rects = self._detector(image.img, 1)
+            rects = self._detector(image.get_gray_img(), 1)
             if not rects:
                 self._logger.warning(
                     "Face rectangle not found. Treating whole image as face box. "
@@ -111,6 +111,7 @@ class Detector:
             image = Image(img_path)
             try:
                 rect = self._detect_face_rect(image)  # detect rectangles with faces
+
                 shape = self._predictor(image.get_gray_img(), rect)  # detect landmarks
 
                 self._landmarks_collection[str(image)] = _shape_to_dict(shape)
