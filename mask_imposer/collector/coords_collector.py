@@ -52,7 +52,7 @@ class CoordinatesCollector:
         cv2.destroyAllWindows()
         if not confirmed:
             return self.reset()
-        self._logger.info(f"Coordinates accepted by user.")
+        self._logger.info("Coordinates accepted by user.")
         return self.mask_coords
 
     def _assign_mask_coords(self) -> None:
