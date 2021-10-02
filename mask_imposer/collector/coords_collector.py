@@ -1,8 +1,9 @@
 from logging import Logger
-from typing import List, Dict, Optional, Any
-from termcolor import colored
+from typing import Any, Dict, List, Optional
 
 import cv2
+from termcolor import colored
+
 from mask_imposer.imposer.mask_pointers import Pointer
 
 
@@ -51,7 +52,7 @@ class CoordinatesCollector:
         cv2.destroyAllWindows()
         if not confirmed:
             return self.reset()
-        self._logger.info(f"Coordinates accepted by user.")
+        self._logger.info("Coordinates accepted by user.")
         return self.mask_coords
 
     def _assign_mask_coords(self) -> None:

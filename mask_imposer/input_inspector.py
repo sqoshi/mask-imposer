@@ -20,7 +20,10 @@ class Inspector:
         self._images: List[str] = []
 
     def _find_images(self, path: str) -> List[str]:
-        """Find images in given path recognized by their extensions [filename.extension]."""
+        """Find images in given path.
+
+        File is classified as img by extension [x.extension].
+        """
         all_files = listdir(path)
         if not all_files:
             self._logger.critical(f"{path} is empty.")
