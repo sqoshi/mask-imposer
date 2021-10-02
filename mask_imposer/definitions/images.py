@@ -10,7 +10,7 @@ class ImageFormat(Enum):
     webp = "webp"
 
     def __str__(self) -> str:
-        return self.value
+        return str(self.value)
 
     @staticmethod
     def is_image(f: str) -> bool:
