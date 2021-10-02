@@ -1,8 +1,9 @@
 from logging import Logger
-from typing import List, Dict, Optional, Any
-from termcolor import colored
+from typing import Any, Dict, List, Optional
 
 import cv2
+from termcolor import colored
+
 from mask_imposer.imposer.mask_pointers import Pointer
 
 
