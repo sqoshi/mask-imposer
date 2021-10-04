@@ -3,6 +3,7 @@ from mask_imposer.definitions import Improvements, Output
 from mask_imposer.detector.landmark_detector import Detector
 from mask_imposer.imposer.mask_imposer import Imposer
 from mask_imposer.input_inspector import Inspector
+from run import _create_mask_set, get_bundled_mask_set
 
 output = Output(args.output_dir, args.output_format)
 inspector.inspect(args.input_dir)
@@ -15,7 +16,7 @@ class MaskImposer:
     def __init__(self) -> None:
         self._logger = get_configured_logger()
         improvements = Improvements(False, False)
-        # mask_set = _create_mask_set(args, logger)
+        mask_set = get_bundled_mask_set(1)  # possibility to mix
         self._inspector = Inspector(self._logger)
         self._detector = Detector(
             images=self._inspector.get_images(),  # dynamic required
