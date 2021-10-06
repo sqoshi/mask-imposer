@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="Mask Imposer",
@@ -9,7 +9,7 @@ setup(
     author_email="piotrpopis@icloud.com",
     license="MIT",
     py_modules=["run"],
-    packages=["mask_imposer"],
+    packages=["mask_imposer"] + list(find_packages()),
     zip_safe=False,
     entry_points={
         "console_scripts": [
