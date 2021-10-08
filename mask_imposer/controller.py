@@ -3,7 +3,6 @@ from pathlib import Path
 from typing import List, Union, Any
 
 import cv2
-import numpy
 from cv2 import waitKey
 from numpy.typing import NDArray
 

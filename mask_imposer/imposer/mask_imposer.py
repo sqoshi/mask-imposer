@@ -6,7 +6,6 @@ from os.path import join
 from typing import Any, Dict, Tuple, Union, Optional, List
 
 import cv2
-from numpy import ndarray, dtype
 from numpy.typing import NDArray
 from termcolor import colored
 
