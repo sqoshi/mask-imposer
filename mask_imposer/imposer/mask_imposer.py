@@ -160,7 +160,7 @@ class Imposer:
         left_top_point = self._fit_left_top_coords(landmarks_dict, pointer_map)
 
         replaced_box_primitive = target_image.img[
-            left_top_point.y :, left_top_point.x :
+            left_top_point.y:, left_top_point.x:
         ]
         mask_limits = Size(*replaced_box_primitive.shape[:-1])
 
