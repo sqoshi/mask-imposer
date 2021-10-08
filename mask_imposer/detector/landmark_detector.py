@@ -47,8 +47,7 @@ def get_predictor(predictor_fp: str, auto_download: bool, logger: Logger) -> str
             predictor_fp = download_predictor(
                 logger,
                 auto=auto_download,
-                predictor_name=
-                "shape_predictor_68_face_landmarks.bz2"
+                predictor_name="shape_predictor_68_face_landmarks.bz2"
             )
     return predictor_fp
 
