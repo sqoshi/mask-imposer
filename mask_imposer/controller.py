@@ -17,8 +17,8 @@ def _get_bundled_mask_set(set_index: int) -> MaskSet:
     """Creates MaskSet object from bundled sets."""
     curr_fp = Path(os.path.dirname(os.path.realpath(__file__))).parent
     return MaskSet(
-        os.path.join(curr_fp, f"bundled/set_0{set_index}/mask_image.png"),
-        os.path.join(curr_fp, f"bundled/set_0{set_index}/mask_coords.json")
+        os.path.join(curr_fp, f"mask_imposer/bundled/set_0{set_index}/mask_image.png"),
+        os.path.join(curr_fp, f"mask_imposer/bundled/set_0{set_index}/mask_coords.json")
     )
 
 
