@@ -96,39 +96,39 @@ class Imposer:
         for c in range(0, 3):
             only_mask = alpha_s * mask_img[: mask_size.h, : mask_size.w, c]
             if not surplus.h and not surplus.w:
-                target_image.img[left_top_point.y :, left_top_point.x :, c] = (
+                target_image.img[left_top_point.y:, left_top_point.x:, c] = (
                     only_mask
                     + alpha_l
-                    * target_image.img[left_top_point.y :, left_top_point.x :, c]
+                    * target_image.img[left_top_point.y:, left_top_point.x:, c]
                 )
             elif surplus.h and not surplus.w:
                 target_image.img[
-                    left_top_point.y : -surplus.h, left_top_point.x :, c
+                    left_top_point.y: -surplus.h, left_top_point.x:, c
                 ] = (
                     only_mask
                     + alpha_l
                     * target_image.img[
-                        left_top_point.y : -surplus.h, left_top_point.x :, c
+                        left_top_point.y: -surplus.h, left_top_point.x:, c
                     ]
                 )
             elif not surplus.h and surplus.w:
                 target_image.img[
-                    left_top_point.y :, left_top_point.x : -surplus.w, c
+                    left_top_point.y:, left_top_point.x: -surplus.w, c
                 ] = (
                     only_mask
                     + alpha_l
                     * target_image.img[
-                        left_top_point.y :, left_top_point.x : -surplus.w, c
+                        left_top_point.y:, left_top_point.x: -surplus.w, c
                     ]
                 )
             elif surplus.h and surplus.w:
                 target_image.img[
-                    left_top_point.y : -surplus.h, left_top_point.x : -surplus.w, c
+                    left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c
                 ] = (
                     only_mask
                     + alpha_l
                     * target_image.img[
-                        left_top_point.y : -surplus.h, left_top_point.x : -surplus.w, c
+                        left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c
                     ]
                 )
 
