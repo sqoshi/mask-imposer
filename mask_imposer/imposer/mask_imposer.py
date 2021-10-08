@@ -103,9 +103,7 @@ class Imposer:
                         * target_image.img[left_top_point.y:, left_top_point.x:, c]
                 )
             elif surplus.h and not surplus.w:
-                target_image.img[
-                left_top_point.y: -surplus.h, left_top_point.x:, c
-                ] = (
+                target_image.img[left_top_point.y: -surplus.h, left_top_point.x:, c] = (
                         only_mask
                         + alpha_l
                         * target_image.img[
@@ -113,9 +111,7 @@ class Imposer:
                           ]
                 )
             elif not surplus.h and surplus.w:
-                target_image.img[
-                left_top_point.y:, left_top_point.x: -surplus.w, c
-                ] = (
+                target_image.img[left_top_point.y:, left_top_point.x: -surplus.w, c] = (
                         only_mask
                         + alpha_l
                         * target_image.img[
@@ -123,9 +119,7 @@ class Imposer:
                           ]
                 )
             elif surplus.h and surplus.w:
-                target_image.img[
-                left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c
-                ] = (
+                target_image.img[left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c] = (
                         only_mask
                         + alpha_l
                         * target_image.img[
