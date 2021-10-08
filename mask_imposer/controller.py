@@ -58,6 +58,6 @@ class MaskImposer:
         if show:
             for mi in masked_images:
                 cv2.imshow("Sample", mi)
-                waitKey(5)
+                waitKey(0)
 
         return masked_images
