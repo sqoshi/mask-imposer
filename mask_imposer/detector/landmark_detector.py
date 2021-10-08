@@ -1,6 +1,4 @@
-import os
 from logging import Logger
-from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import cv2

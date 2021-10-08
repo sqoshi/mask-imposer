@@ -61,3 +61,8 @@ class MaskImposer:
                 waitKey(0)
 
         return masked_images
+
+    @classmethod
+    def save(cls, img, filepath) -> None:
+        """Saves image in given path using opencv."""
+        cv2.imwrite(filepath, img)

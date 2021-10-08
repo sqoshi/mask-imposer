@@ -29,7 +29,7 @@ def find_predictor(default_name, logger) -> Optional[str]:
     startup_dir = os.getcwd()
     for hc_dir in (file_dir, startup_dir):
         logger.info("Looking for shape predictor in '%s'" % hc_dir)
-        for dire, subdirs, filenames in os.walk(hc_dir):
+        for dire, _, filenames in os.walk(hc_dir):
             for fn in filenames:
                 if default_name in fn:
                     predictor_fp = os.path.join(dire, fn)
