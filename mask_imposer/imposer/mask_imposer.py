@@ -34,11 +34,11 @@ class Imposer:
     """Class overlay mask image on front face according to detected landmarks."""
 
     def __init__(
-            self,
-            output: Optional[Output],
-            mask_set: MaskSet,
-            improvements: Improvements,
-            logger: Logger
+        self,
+        output: Optional[Output],
+        mask_set: MaskSet,
+        improvements: Improvements,
+        logger: Logger,
     ) -> None:
         self._logger = logger
         if output is not None:
@@ -49,12 +49,11 @@ class Imposer:
             self.live_imposing = True
         self._should_draw_landmarks = improvements.draw_landmarks
         self._show_samples = improvements.show_samples
-        # self._landmarks = landmarks
         self._mask = MaskImage(mask_set)
 
     @staticmethod
     def _fit_left_top_coords(
-            landmarks_dict: Dict[int, Tuple[int, int]], mask_pointers_map: PointerMap
+        landmarks_dict: Dict[int, Tuple[int, int]], mask_pointers_map: PointerMap
     ) -> Pointer:
         """Determines coordinates of left top point from which mask rectangle will be pasted.
 
@@ -68,7 +67,7 @@ class Imposer:
 
     @staticmethod
     def _compute_size_surpluses(
-            target: NDArray, overlay: NDArray  # type:ignore
+        target: NDArray, overlay: NDArray  # type:ignore
     ) -> Tuple[Any, Any]:
         """Get differences between width and height limit of to-replace box
         from original image and mask.
@@ -77,11 +76,11 @@ class Imposer:
 
     @staticmethod
     def _cut_paste(
-            target_image: Image,
-            mask_img: NDArray,  # type:ignore
-            surplus: Size,
-            left_top_point: Pointer,
-            mask_size: Size,
+        target_image: Image,
+        mask_img: NDArray,  # type:ignore
+        surplus: Size,
+        left_top_point: Pointer,
+        mask_size: Size,
     ) -> None:
         """Paste mask_img on target_image in specific place on this image.
 
@@ -97,41 +96,47 @@ class Imposer:
         for c in range(0, 3):
             only_mask = alpha_s * mask_img[: mask_size.h, : mask_size.w, c]
             if not surplus.h and not surplus.w:
-                target_image.img[left_top_point.y:, left_top_point.x:, c] = (
-                        only_mask
-                        + alpha_l
-                        * target_image.img[left_top_point.y:, left_top_point.x:, c]
+                target_image.img[left_top_point.y :, left_top_point.x :, c] = (
+                    only_mask
+                    + alpha_l
+                    * target_image.img[left_top_point.y :, left_top_point.x :, c]
                 )
             elif surplus.h and not surplus.w:
-                target_image.img[left_top_point.y: -surplus.h, left_top_point.x:, c] = (
-                        only_mask
-                        + alpha_l
-                        * target_image.img[
-                          left_top_point.y: -surplus.h, left_top_point.x:, c
-                          ]
+                target_image.img[
+                    left_top_point.y : -surplus.h, left_top_point.x :, c
+                ] = (
+                    only_mask
+                    + alpha_l
+                    * target_image.img[
+                        left_top_point.y : -surplus.h, left_top_point.x :, c
+                    ]
                 )
             elif not surplus.h and surplus.w:
-                target_image.img[left_top_point.y:, left_top_point.x: -surplus.w, c] = (
-                        only_mask
-                        + alpha_l
-                        * target_image.img[
-                          left_top_point.y:, left_top_point.x: -surplus.w, c
-                          ]
+                target_image.img[
+                    left_top_point.y :, left_top_point.x : -surplus.w, c
+                ] = (
+                    only_mask
+                    + alpha_l
+                    * target_image.img[
+                        left_top_point.y :, left_top_point.x : -surplus.w, c
+                    ]
                 )
             elif surplus.h and surplus.w:
-                target_image.img[left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c] = (
-                        only_mask
-                        + alpha_l
-                        * target_image.img[
-                          left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c
-                          ]
+                target_image.img[
+                    left_top_point.y : -surplus.h, left_top_point.x : -surplus.w, c
+                ] = (
+                    only_mask
+                    + alpha_l
+                    * target_image.img[
+                        left_top_point.y : -surplus.h, left_top_point.x : -surplus.w, c
+                    ]
                 )
 
     def _draw_landmarks(
-            self,
-            landmarks_dict: Dict[int, Tuple[int, int]],
-            image: Image,
-            left_top_point: Pointer,
+        self,
+        landmarks_dict: Dict[int, Tuple[int, int]],
+        image: Image,
+        left_top_point: Pointer,
     ) -> None:
         """Draw landmarks on output images according to flag."""
         if self._should_draw_landmarks:
@@ -145,7 +150,7 @@ class Imposer:
             )
 
     def _paste_mask(
-            self, target_image: Image, landmarks_dict: Dict[int, Tuple[int, int]]
+        self, target_image: Image, landmarks_dict: Dict[int, Tuple[int, int]]
     ) -> None:
         """Pastes mask image on target in place according to detected landmarks on original image
 
@@ -155,8 +160,8 @@ class Imposer:
         left_top_point = self._fit_left_top_coords(landmarks_dict, pointer_map)
 
         replaced_box_primitive = target_image.img[
-                                 left_top_point.y:, left_top_point.x:
-                                 ]
+            left_top_point.y :, left_top_point.x :
+        ]
         mask_limits = Size(*replaced_box_primitive.shape[:-1])
 
         surplus = Size(
