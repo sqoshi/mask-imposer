@@ -1,4 +1,6 @@
+import os
 from logging import Logger
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import cv2
@@ -8,7 +10,7 @@ from _dlib_pybind11 import (full_object_detection, get_frontal_face_detector,
                             shape_predictor)
 from numpy.typing import NDArray
 
-from .download import download_predictor
+from .download import download_predictor, find_predictor
 from .image import Image
 
 
@@ -39,17 +41,30 @@ def _shape_to_dict(shape: full_object_detection) -> Dict[int, Tuple[int, int]]:
     return result
 
 
+def get_predictor(predictor_fp: str, auto_download: bool, logger: Logger) -> str:
+    """Looking for predictor in cwd or downloads it from dlib official page."""
+    if predictor_fp is None:
+        predictor_fp = find_predictor("shape_predictor_68_face_landmarks.dat", logger)
+        if predictor_fp is None:
+            predictor_fp = download_predictor(
+                logger,
+                auto=auto_download,
+                predictor_name=
+                "shape_predictor_68_face_landmarks.bz2"
+            )
+    return predictor_fp
+
+
 class Detector:
     def __init__(self,  # pylint:disable=R0913
                  predictor_fp: Optional[str],
                  face_detection: bool,
                  show_samples: bool,
+                 auto_download: bool,
                  logger: Logger) -> None:
         self._logger = logger
         self._detector = get_frontal_face_detector()
-        if not predictor_fp:
-            predictor_fp = download_predictor(logger)
-        self._predictor = shape_predictor(predictor_fp)
+        self._predictor = shape_predictor(get_predictor(predictor_fp, auto_download, logger))
         self._landmarks_collection: Dict[str, Dict[int, Tuple[int, int]]] = {}
 
         self._should_detect_face_rect = face_detection

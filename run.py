@@ -67,7 +67,7 @@ def main():
     inspector = Inspector(logger)
     inspector.inspect(args.input_dir)
     detector = Detector(args.shape_predictor, not args.off_face_detection,
-                        False, logger)
+                        False, False, logger)
     detector.detect(inspector.get_images())
     # detector.save(args.output_dir, args.output_format)
     imposer = Imposer(output, mask_set, improvements, logger)

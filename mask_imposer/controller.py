@@ -33,6 +33,7 @@ class MaskImposer:
             predictor_fp=None,
             face_detection=True,
             show_samples=False,
+            auto_download=True,
             logger=self._logger
         )
         self._imposer = Imposer(
