@@ -39,7 +39,7 @@ def _shape_to_dict(shape: full_object_detection) -> Dict[int, Tuple[int, int]]:
     return result
 
 
-def get_predictor(predictor_fp: str, auto_download: bool, logger: Logger) -> str:
+def get_predictor(predictor_fp: Optional[str], auto_download: bool, logger: Logger) -> str:
     """Looking for predictor in cwd or downloads it from dlib official page."""
     if predictor_fp is None:
         predictor_fp = find_predictor("shape_predictor_68_face_landmarks.dat", logger)
@@ -68,7 +68,7 @@ class Detector:
         self._should_display_samples = show_samples
 
     def forget_landmarks(self) -> None:
-        self._landmarks_collection: Dict[str, Dict[int, Tuple[int, int]]] = {}
+        self._landmarks_collection = {}
 
     @classmethod
     def _display_sample(cls, image: Image, rect: dlib.rectangle,

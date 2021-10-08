@@ -23,22 +23,22 @@ def _unpack_bz2(filepath: Union[Path, str]) -> str:
     return model_fp
 
 
-def find_predictor(default_name, logger) -> Optional[str]:
+def find_predictor(default_name: str, logger: Logger) -> Optional[str]:
     """Looking for a predictor in place of installed package and in current working directory. """
     file_dir = Path(os.path.dirname(os.path.realpath(__file__))).parent.parent
     startup_dir = os.getcwd()
     for hc_dir in (file_dir, startup_dir):
         logger.info("Looking for shape predictor in '%s'" % hc_dir)
-        for dire, _, filenames in os.walk(hc_dir):
+        for dire, _, filenames in os.walk(hc_dir):  # type: ignore
             for fn in filenames:
-                if default_name in fn:
-                    predictor_fp = os.path.join(dire, fn)
+                if default_name in str(fn):
+                    predictor_fp = os.path.join(str(dire), str(fn))
                     logger.info("Predictor found in '%s'" % predictor_fp)
                     return predictor_fp
     return None
 
 
-def _accepted_download(auto) -> bool:
+def _accepted_download(auto: bool) -> bool:
     """Ask for permission to download bundled model."""
     if auto:
         return True

@@ -1,10 +1,11 @@
 import os
 from pathlib import Path
-from typing import List, Union
+from typing import List, Union, Any
 
 import cv2
 import numpy
 from cv2 import waitKey
+from numpy.typing import NDArray
 
 from mask_imposer.colored_logger import get_configured_logger
 from mask_imposer.definitions import Improvements, MaskSet
@@ -43,7 +44,7 @@ class MaskImposer:
             logger=self._logger
         )
 
-    def impose_mask(self, image: Union[str, List[str]], show=False) -> List[numpy.ndarray]:
+    def impose_mask(self, image: Union[str, List[str]], show: bool = False) -> List[NDArray[Any]]:
         """Imposes mask on image.
 
         :param image: List of paths to images or single image path
@@ -63,6 +64,6 @@ class MaskImposer:
         return masked_images
 
     @classmethod
-    def save(cls, img, filepath) -> None:
+    def save(cls, img: NDArray[Any], filepath: str) -> None:
         """Saves image in given path using opencv."""
         cv2.imwrite(filepath, img)
