@@ -104,7 +104,7 @@ class Detector:
                 return rects.pop()
             self._logger.warning(
                 f"Detected multiple faces on image `{image}`. Taking first found."
-            )
+                )
             return rects.pop()
         # whole image as face rectangle (there should be only a center face on image)
         return image.get_rectangle()
