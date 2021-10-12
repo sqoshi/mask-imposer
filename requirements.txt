@@ -1,6 +1,6 @@
 termcolor==1.1.0
 setuptools==44.0.0
-dlib==19.22.0
+dlib>=19.22.0
 progressbar==2.5
 pip>=20.0.2
 pytest>=6.2.4
