@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="Mask Imposer",
-    version="2.0.0",
+    version="2.0.1",
     description="Tool to overlay fake face masks.",
     url="https://github.com/sqoshi/mask-imposer",
     author="Piotr Popis",
@@ -20,6 +20,7 @@ setup(
     install_requires=[
         "wheel>=0.36.2",
         "termcolor>=1.1.0",
+        "numpy>=1.21.1",
         "dlib>=19.22.0",
         "progressbar>=2.5",
         "opencv-python>=4.5.3.5"
