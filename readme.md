@@ -1,6 +1,6 @@
 # Mask imposer 😷
 
-Tool to overlay fake face masks.
+Command line tool and python package to overlay fake face masks.
 
 Project is a part of series related with my Bachelor of Science Thesis research.
 
@@ -15,17 +15,20 @@ Project is a part of series related with my Bachelor of Science Thesis research.
     - [Imposition](#imposition)
 - [Installation](#installation)
 - [Usage](#usage)
-    - [Options](#options)
-    - [Custom mask](#custom-mask)
-    - [Workflow](#workflow)
+    - [Command line tool](#command-line-tool)
+        - [Options](#options)
+            - [Custom mask](#custom-mask)
+            - [Workflow](#workflow)
+    - [Python package](#python-package)
 - [Documentation](#documentation)
 
 ## Introduction
 
 Mask imposer is a tool for overlaying face mask over human central faces.
 
-Application main purpose is to make fake datasets of people in face masks. Since there is no available free dataset,
-application is useful in machine or deep learning in classification/ recognition problems.
+Application main purpose is to make fake datasets of people in face masks. Since there is no
+available free dataset, application is useful in machine or deep learning in classification/
+recognition problems.
 
 ## General
 
@@ -53,8 +56,8 @@ For now program requires only 4 of them:
 
 ### `Imposition`
 
-When landmarks have been detected, program is reading mask image with some hardcoded coordinates (X,Y) responding to all
-indexes mentioned in [previous paragraph](#important-landmarks).
+When landmarks have been detected, program is reading mask image with some hardcoded coordinates (
+X,Y) responding to all indexes mentioned in [previous paragraph](#important-landmarks).
 
 ![mask.png](docs/.readme_media/points.png)
 
@@ -65,12 +68,13 @@ In next state program computes distances between opposite dots in vertical and h
 
 ![lines.png](docs/.readme_media/lines.png)
 
-As almost last step program scales mask until above distances are equal to responding distances between landmarks found
-in target image.
+As almost last step program scales mask until above distances are equal to responding distances
+between landmarks found in target image.
 
 ![example_landmarks.png](docs/.readme_media/example_landmarks.png)
 
-For now protruding part of the face mask is being cut and saved in output directory (default=`results`).
+For now protruding part of the face mask is being cut and saved in output directory (
+default=`results`).
 
 ![example_res2.png](docs/.readme_media/example_res2.png)
 
@@ -81,6 +85,8 @@ pip install git+https://github.com/sqoshi/mask-imposer.git
 ```
 
 ## Usage
+
+### Command Line Tool
 
 ```
 mim INPUT_DIR --option argument
@@ -103,14 +109,14 @@ mim INPUT_DIR --option argument
 
 ### Custom Mask
 
-Mask maybe inputted via terminal by using flag `--mask-img`. Then mask image popup on the screen and program asks user
-to interactively mark characteristic points on displayed image.
+Mask maybe inputted via terminal by using flag `--mask-img`. Then mask image popup on the screen
+and program asks user to interactively mark characteristic points on displayed image.
 
-If flag `--mask-img` would be combined with `--mask-coords` then characteristic points will be read from inputted
-filepath.
+If flag `--mask-img` would be combined with `--mask-coords` then characteristic points will be read
+from inputted filepath.
 
-Using custom mask requires inputting a _path to mask image_ or _path to mask image and a path to json
-with [important landmarks](#important-landmarks)_.
+Using custom mask requires inputting a _path to mask image_ or _path to mask image and a path to
+json with [important landmarks](#important-landmarks)_.
 
 Image requirements:
 
@@ -165,6 +171,28 @@ Example `mask_coords.json`:
 3. Check out results stored as default in `results` directory under current directory.
 
    ![example_res.png](docs/.readme_media/example_res.png)
+
+### Python Package
+
+Program is also programmatically usable.
+
+For example:
+
+```python
+from mask_imposer import MaskImposer
+
+mim = MaskImposer()
+
+masked_images = mim.impose_mask(
+    [
+        "/path/to/img1.png",
+    ],
+    show=True,
+)
+
+for i, x in enumerate(masked_images):
+    mim.save(x, f"5masked_{i}.png")
+```
 
 ## Documentation
 

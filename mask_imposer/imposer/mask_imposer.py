@@ -3,7 +3,7 @@ import shutil
 import time
 from logging import Logger
 from os.path import join
-from typing import Any, Dict, Tuple, Union
+from typing import Any, Dict, Tuple, Union, Optional, List
 
 import cv2
 from numpy.typing import NDArray
@@ -34,18 +34,20 @@ class Imposer:
 
     def __init__(
         self,
-        landmarks: detections_dict,
-        output: Output,
+        output: Optional[Output],
         mask_set: MaskSet,
         improvements: Improvements,
-        logger: Logger
+        logger: Logger,
     ) -> None:
         self._logger = logger
-        self._output_dir: str = output.directory
-        self._output_format: ImageFormat = output.format
+        if output is not None:
+            self.live_imposing = False
+            self._output_dir: str = output.directory
+            self._output_format: ImageFormat = output.format
+        else:
+            self.live_imposing = True
         self._should_draw_landmarks = improvements.draw_landmarks
         self._show_samples = improvements.show_samples
-        self._landmarks = landmarks
         self._mask = MaskImage(mask_set)
 
     @staticmethod
@@ -64,7 +66,7 @@ class Imposer:
 
     @staticmethod
     def _compute_size_surpluses(
-            target: NDArray, overlay: NDArray  # type:ignore
+        target: NDArray, overlay: NDArray  # type:ignore
     ) -> Tuple[Any, Any]:
         """Get differences between width and height limit of to-replace box
         from original image and mask.
@@ -211,11 +213,16 @@ class Imposer:
             join(self._output_dir, f"{filename}.{self._output_format}"), image.img
         )
 
-    def impose(self) -> None:
+    def impose(self, landmarks_collection: detections_dict) -> List[NDArray[Any]]:
         """Imposes mask image on images stored as a dictionary keys in landmarks detections."""
-        self._create_output_dir()
-        for image_fp, landmarks_dict in self._landmarks.items():
+        if not self.live_imposing:
+            self._create_output_dir()
+        masked_images = []
+        for image_fp, landmarks_dict in landmarks_collection.items():
             if "masked" not in image_fp:
                 img_obj = Image(image_fp)
                 self._paste_mask(img_obj, landmarks_dict)
-                self.save(get_name_from(image_fp), img_obj)
+                masked_images.append(img_obj.img)
+                if not self.live_imposing:
+                    self.save(get_name_from(image_fp), img_obj)
+        return masked_images

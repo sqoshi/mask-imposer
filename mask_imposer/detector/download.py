@@ -1,8 +1,11 @@
+import os.path
 import sys
 from bz2 import BZ2File
 from http.client import HTTPException
 from logging import Logger
+from pathlib import Path
 from tarfile import CompressionError
+from typing import Union, Optional
 from urllib.error import HTTPError, URLError
 from urllib.request import urlretrieve
 
@@ -11,16 +14,34 @@ from termcolor import colored
 from mask_imposer.beautifiers import TerminalProgressBar
 
 
-def _unpack_bz2(filepath: str) -> str:
+def _unpack_bz2(filepath: Union[Path, str]) -> str:
     """Unpack downloaded bz2 file and returns path to content."""
-    model_name = filepath.replace(".bz2", ".dat")
-    with open(model_name, "wb") as fw:
+    model_name = str(Path(filepath).name).replace(".bz2", ".dat")
+    model_fp = os.path.join(Path(os.path.abspath(__file__)).parent.parent, model_name)
+    with open(model_fp, "wb") as fw:
         fw.write(BZ2File(filepath).read())
-    return model_name
+    return model_fp
 
 
-def _accepted_download() -> bool:
+def find_predictor(default_name: str, logger: Logger) -> Optional[str]:
+    """Looking for a predictor in place of installed package and in current working directory. """
+    file_dir = Path(os.path.dirname(os.path.realpath(__file__))).parent.parent
+    startup_dir = os.getcwd()
+    for hc_dir in (file_dir, startup_dir):
+        logger.info("Looking for shape predictor in '%s'" % hc_dir)
+        for dire, _, filenames in os.walk(hc_dir):  # type: ignore
+            for fn in filenames:
+                if default_name in str(fn):
+                    predictor_fp = os.path.join(str(dire), str(fn))
+                    logger.info("Predictor found in '%s'" % predictor_fp)
+                    return predictor_fp
+    return None
+
+
+def _accepted_download(auto: bool) -> bool:
     """Ask for permission to download bundled model."""
+    if auto:
+        return True
     response = input(
         colored("Would you like to download ", "green")
         + colored("64 [MB]", "red")
@@ -30,17 +51,19 @@ def _accepted_download() -> bool:
 
 
 def download_predictor(
-    logger: Logger,
-    url: str = "http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2",
-    predictor_fp: str = "shape_predictor_68_face_landmarks.bz2"
+        logger: Logger,
+        url: str = "http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2",
+        predictor_name: str = "shape_predictor_68_face_landmarks.bz2",
+        auto: bool = False
 ) -> str:
     """Downloads default dlib shape predictor (68-landmark)"""
 
-    logger.warning("Shape predictor not found.")
-    if _accepted_download():
+    logger.warning("Shape predictor not passed directly.")
+    if _accepted_download(auto):
+        download_fp = Path(os.path.join("/tmp", predictor_name))
         try:
-            urlretrieve(url, predictor_fp, TerminalProgressBar())
-            return _unpack_bz2(predictor_fp)
+            urlretrieve(url, download_fp, TerminalProgressBar())
+            return _unpack_bz2(download_fp)
         except URLError or HTTPError or HTTPException:
             logger.critical(
                 "Error occurred during model download. "
@@ -53,6 +76,9 @@ def download_predictor(
                 "Please input filepath to model via terminal arguments."
             )
             sys.exit()
+        finally:
+            if download_fp.exists() and download_fp.is_file():
+                os.remove(download_fp)
     else:
         logger.critical("Shape predictor not provided. Detection interrupted.")
         sys.exit()

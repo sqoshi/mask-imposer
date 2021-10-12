@@ -8,7 +8,7 @@ from _dlib_pybind11 import (full_object_detection, get_frontal_face_detector,
                             shape_predictor)
 from numpy.typing import NDArray
 
-from .download import download_predictor
+from .download import download_predictor, find_predictor
 from .image import Image
 
 
@@ -39,22 +39,36 @@ def _shape_to_dict(shape: full_object_detection) -> Dict[int, Tuple[int, int]]:
     return result
 
 
+def get_predictor(predictor_fp: Optional[str], auto_download: bool, logger: Logger) -> str:
+    """Looking for predictor in cwd or downloads it from dlib official page."""
+    if predictor_fp is None:
+        predictor_fp = find_predictor("shape_predictor_68_face_landmarks.dat", logger)
+        if predictor_fp is None:
+            predictor_fp = download_predictor(
+                logger,
+                auto=auto_download,
+                predictor_name="shape_predictor_68_face_landmarks.bz2"
+            )
+    return predictor_fp
+
+
 class Detector:
-    def __init__(self, images: List[str],  # pylint:disable=R0913
+    def __init__(self,  # pylint:disable=R0913
                  predictor_fp: Optional[str],
                  face_detection: bool,
                  show_samples: bool,
+                 auto_download: bool,
                  logger: Logger) -> None:
         self._logger = logger
-        self._images = images
         self._detector = get_frontal_face_detector()
-        if not predictor_fp:
-            predictor_fp = download_predictor(logger)
-        self._predictor = shape_predictor(predictor_fp)
+        self._predictor = shape_predictor(get_predictor(predictor_fp, auto_download, logger))
         self._landmarks_collection: Dict[str, Dict[int, Tuple[int, int]]] = {}
 
         self._should_detect_face_rect = face_detection
         self._should_display_samples = show_samples
+
+    def forget_landmarks(self) -> None:
+        self._landmarks_collection = {}
 
     @classmethod
     def _display_sample(cls, image: Image, rect: dlib.rectangle,
@@ -95,19 +109,19 @@ class Detector:
         # whole image as face rectangle (there should be only a center face on image)
         return image.get_rectangle()
 
-    def _check_fails(self) -> None:
+    def _check_fails(self, images_list: List[str]) -> None:
         """Check if landmarks were found for every inputted image and warns about fails."""
-        if len(self._images) != len(self._landmarks_collection):
-            diff = len(self._images) - len(self._landmarks_collection)
+        if len(images_list) != len(self._landmarks_collection):
+            diff = len(images_list) - len(self._landmarks_collection)
             self._logger.warning(f"Landmarks not found in {diff} images.")
 
-    def detect(self) -> None:
+    def detect(self, images_list: List[str]) -> None:
         """Creates landmark collection.
 
         During creation may optionally display samples with drawn landmarks.
         May detect face boxes, but it is preferred to pass images as stated in readme.
         """
-        for img_path in self._images:
+        for img_path in images_list:
             image = Image(img_path)
             try:
                 rect = self._detect_face_rect(image)  # detect rectangles with faces
@@ -122,8 +136,8 @@ class Detector:
             except NotImplementedError:  # must be changed
                 self._logger.warning(f"Landmarks not detected on {image}.")
                 continue
+        self._check_fails(images_list)
         self._logger.info("Detection finished.")
-        self._check_fails()
 
     def get_landmarks(self) -> Dict[str, Dict[int, Tuple[int, int]]]:
         return self._landmarks_collection

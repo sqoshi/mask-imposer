@@ -16,7 +16,7 @@ class PredictorDownloadTestCase(TestCase):
     # noinspection PyTypeChecker
     @patch("mask_imposer.detector.download.input", lambda _: "y")
     def test_should_download_predictor(self) -> None:
-        download_predictor(getLogger("test"), predictor_fp="SPZ.bz2")
+        download_predictor(getLogger("test"), predictor_name="SPZ.bz2")
         self.assertTrue("SPZ.dat" in get_directory_files("."))
         os.remove("SPZ.dat")
         os.remove("SPZ.bz2")
