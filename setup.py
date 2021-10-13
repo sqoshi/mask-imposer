@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="Mask Imposer",
-    version="2.0.1",
+    version="2.2.0",
     description="Tool to overlay fake face masks.",
     url="https://github.com/sqoshi/mask-imposer",
     author="Piotr Popis",

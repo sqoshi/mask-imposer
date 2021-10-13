@@ -1,5 +1,5 @@
 from logging import Logger
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import cv2
 import dlib
@@ -67,8 +67,11 @@ class Detector:
         self._should_detect_face_rect = face_detection
         self._should_display_samples = show_samples
 
+        self.fake_map = {}
+
     def forget_landmarks(self) -> None:
         self._landmarks_collection = {}
+        self.fake_map = {}
 
     @classmethod
     def _display_sample(cls, image: Image, rect: dlib.rectangle,
@@ -115,7 +118,7 @@ class Detector:
             diff = len(images_list) - len(self._landmarks_collection)
             self._logger.warning(f"Landmarks not found in {diff} images.")
 
-    def detect(self, images_list: List[str]) -> None:
+    def detect(self, images_list: List[Union[str, tuple]], create_map: bool) -> None:
         """Creates landmark collection.
 
         During creation may optionally display samples with drawn landmarks.
@@ -129,6 +132,9 @@ class Detector:
                 shape = self._predictor(image.get_gray_img(), rect)  # detect landmarks
 
                 self._landmarks_collection[str(image)] = _shape_to_dict(shape)
+
+                if create_map:
+                    self.fake_map[str(image)] = image.img
 
                 if self._should_display_samples:
                     self._display_sample(image, rect, shape)

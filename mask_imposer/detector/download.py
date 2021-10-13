@@ -60,6 +60,7 @@ def download_predictor(
 
     logger.warning("Shape predictor not passed directly.")
     if _accepted_download(auto):
+        logger.warning("Downloading shape `shape_predictor_68_face_landmarks.bz2` ...")
         download_fp = Path(os.path.join("/tmp", predictor_name))
         try:
             urlretrieve(url, download_fp, TerminalProgressBar())

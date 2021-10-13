@@ -1,19 +1,24 @@
-from typing import Optional
+from typing import Optional, Union, Any, Tuple
 
 from _dlib_pybind11 import rectangle
 from cv2 import COLOR_BGR2BGRA, COLOR_BGR2GRAY, cvtColor, imread
+from numpy.typing import NDArray
+
+
+def set_img(file: Union[str, Tuple[NDArray[Any], str]]) -> Tuple[NDArray[Any], str]:
+    return file if isinstance(file, tuple) else (imread(file, -1), file)
 
 
 class Image:
     """Hold image data."""
 
-    def __init__(self, filepath: str) -> None:
-        self.img = imread(filepath, -1)
-        if self.img.shape[-1] == 3:
-            self.img = self.converted_rgba()
-        self.__name: str = filepath
+    def __init__(self, file: Union[str, Tuple[str, NDArray[Any]]]) -> None:
+        self.img, self.__name = set_img(file)
         self._gray_img: Optional[cvtColor] = None
         self._rect: Optional[rectangle] = None
+
+        if self.img.shape[-1] == 3:
+            self.img = self.converted_rgba()
 
     def __str__(self) -> str:
         return self.__name
