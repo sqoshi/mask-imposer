@@ -60,6 +60,10 @@ class MaskImposer:
                 cv2.imshow("Sample", mi)
                 waitKey(0)
 
+        # single image was passed then return its result instead of list
+        if len(masked_images) == 1:
+            return masked_images.pop()
+
         return masked_images
 
     @classmethod
@@ -69,7 +73,8 @@ class MaskImposer:
 
 
 if __name__ == '__main__':
-    np_arr = cv2.imread("/home/popis/Downloads/sample.jpeg")
+    np_arr = cv2.imread("/home/popis/Documents/mask-imposer/tests/integration/data/input/sample.jpeg")
     mim = MaskImposer()
     rs = mim.impose_mask((np_arr, "/home/popis/Downloads/sample_unique_name.jpeg"), show=True)
+    cv2.imwrite("test.png", rs)
     print(rs)

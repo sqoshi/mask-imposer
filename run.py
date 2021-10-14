@@ -68,7 +68,7 @@ def main():
     inspector.inspect(args.input_dir)
     detector = Detector(args.shape_predictor, not args.off_face_detection,
                         False, False, logger)
-    detector.detect(inspector.get_images())
+    detector.detect(inspector.get_images(), create_map=False)
     # detector.save(args.output_dir, args.output_format)
     imposer = Imposer(output, mask_set, improvements, logger)
-    imposer.impose(detector.get_landmarks())
+    imposer.impose(detector.get_landmarks(), fake_map=None)

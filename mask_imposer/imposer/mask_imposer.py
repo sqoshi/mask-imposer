@@ -225,10 +225,6 @@ class Imposer:
                 masked_images.append(img_obj.img)
 
                 if not self.live_imposing:
-                    self.save(get_name_from(image_fp), img_obj.img)
-
-        # single image was passed then return its result instead of list
-        if len(landmarks_collection.items()) == 1 and len(masked_images) == 1:
-            return masked_images.pop()
+                    self.save(get_name_from(image_fp), img_obj)
 
         return masked_images

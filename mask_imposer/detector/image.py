@@ -6,7 +6,11 @@ from numpy.typing import NDArray
 
 
 def set_img(file: Union[str, Tuple[NDArray[Any], str]]) -> Tuple[NDArray[Any], str]:
-    return file if isinstance(file, tuple) else (imread(file, -1), file)
+    if isinstance(file, tuple):
+        fake_path = [f for f in file if isinstance(f, str)].pop()
+        np_arr = [f for f in file if not isinstance(f, str)].pop()
+        return np_arr, fake_path
+    return imread(file, -1), file
 
 
 class Image:
@@ -16,7 +20,7 @@ class Image:
         self.img, self.__name = set_img(file)
         self._gray_img: Optional[cvtColor] = None
         self._rect: Optional[rectangle] = None
-
+        print(file)
         if self.img.shape[-1] == 3:
             self.img = self.converted_rgba()
 
