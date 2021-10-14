@@ -52,13 +52,20 @@ class MaskImposer:
         """
         images = [image] if not isinstance(image, list) else image
         self._detector.detect(images, create_map=True)
-        masked_images = self._imposer.impose(self._detector.get_landmarks(), self._detector.fake_map)
+        masked_images = self._imposer.impose(
+            self._detector.get_landmarks(),
+            self._detector.fake_map
+        )
         self._detector.forget_landmarks()
 
         if show:
             for mi in masked_images:
                 cv2.imshow("Sample", mi)
                 waitKey(0)
+
+        # single image was passed then return its result instead of list
+        if len(masked_images) == 1:
+            return masked_images.pop()
 
         return masked_images
 
@@ -68,8 +75,11 @@ class MaskImposer:
         cv2.imwrite(filepath, img)
 
 
-if __name__ == '__main__':
-    np_arr = cv2.imread("/home/popis/Downloads/sample.jpeg")
-    mim = MaskImposer()
-    rs = mim.impose_mask((np_arr, "/home/popis/Downloads/sample_unique_name.jpeg"), show=True)
-    print(rs)
+# if __name__ == '__main__':
+#     np_arr = cv2.imread(
+#     "/home/popis/Documents/mask-imposer/tests/integration/data/input/sample.jpeg"
+#     )
+#     mim = MaskImposer()
+#     rs = mim.impose_mask((np_arr, "/home/popis/Downloads/sample_unique_name.jpeg"), show=True)
+#     cv2.imwrite("test.png", rs)
+#     print(rs)

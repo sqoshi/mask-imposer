@@ -28,12 +28,12 @@ def find_predictor(default_name: str, logger: Logger) -> Optional[str]:
     file_dir = Path(os.path.dirname(os.path.realpath(__file__))).parent.parent
     startup_dir = os.getcwd()
     for hc_dir in (file_dir, startup_dir):
-        logger.info("Looking for shape predictor in '%s'" % hc_dir)
+        logger.info(f"Looking for shape predictor in '{hc_dir}'")
         for dire, _, filenames in os.walk(hc_dir):  # type: ignore
             for fn in filenames:
                 if default_name in str(fn):
                     predictor_fp = os.path.join(str(dire), str(fn))
-                    logger.info("Predictor found in '%s'" % predictor_fp)
+                    logger.info(f"Predictor found in '{predictor_fp}'")
                     return predictor_fp
     return None
 
