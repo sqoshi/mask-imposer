@@ -27,14 +27,12 @@ class Pointer:
         self.x, self.y = self.scaled(x_scale, y_scale)
 
     def __str__(self) -> str:
-        return "Pointer({}, {})".format(
-            colored(f"{self.x}", "red"), colored(f"{self.y}", "red")
-        )
+        return f"Pointer({colored(f'{self.x}', 'red')}, {colored(f'{self.y}', 'red')})"
 
 
 def _read_pointer_map_from(filepath: str) -> Dict[str, List[int]]:
     """Read json with 4 characteristic landmarks."""
-    with open(filepath) as f:
+    with open(filepath, encoding="utf-8") as f:
         return json.load(f)
 
 
