@@ -20,7 +20,6 @@ class Image:
         self.img, self.__name = set_img(file)
         self._gray_img: Optional[cvtColor] = None
         self._rect: Optional[rectangle] = None
-        print(file)
         if self.img.shape[-1] == 3:
             self.img = self.converted_rgba()
 

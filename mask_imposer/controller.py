@@ -43,7 +43,9 @@ class MaskImposer:
             logger=self._logger
         )
 
-    def impose_mask(self, image: Union[str, List[str]], show: bool = False) -> List[NDArray[Any]]:
+    def impose_mask(
+            self, image: Union[str, List[str]], show: bool = False
+    ) -> Union[NDArray[Any], List[NDArray[Any]]]:
         """Imposes mask on image.
 
         :param image: List of paths to images or single image path
@@ -73,7 +75,6 @@ class MaskImposer:
     def save(cls, img: NDArray[Any], filepath: str) -> None:
         """Saves image in given path using opencv."""
         cv2.imwrite(filepath, img)
-
 
 # if __name__ == '__main__':
 #     np_arr = cv2.imread(
