@@ -28,12 +28,12 @@ def find_predictor(default_name: str, logger: Logger) -> Optional[str]:
     file_dir = Path(os.path.dirname(os.path.realpath(__file__))).parent.parent
     startup_dir = os.getcwd()
     for hc_dir in (file_dir, startup_dir):
-        logger.info("Looking for shape predictor in '%s'" % hc_dir)
+        logger.info(f"Looking for shape predictor in '{hc_dir}'")
         for dire, _, filenames in os.walk(hc_dir):  # type: ignore
             for fn in filenames:
                 if default_name in str(fn):
                     predictor_fp = os.path.join(str(dire), str(fn))
-                    logger.info("Predictor found in '%s'" % predictor_fp)
+                    logger.info(f"Predictor found in '{predictor_fp}'")
                     return predictor_fp
     return None
 
@@ -60,6 +60,7 @@ def download_predictor(
 
     logger.warning("Shape predictor not passed directly.")
     if _accepted_download(auto):
+        logger.warning("Downloading shape `shape_predictor_68_face_landmarks.bz2` ...")
         download_fp = Path(os.path.join("/tmp", predictor_name))
         try:
             urlretrieve(url, download_fp, TerminalProgressBar())

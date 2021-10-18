@@ -75,8 +75,8 @@ class Imposer:
 
     @staticmethod
     def _cut_paste(
-        target_image: Image,
-        mask_img: NDArray,  # type:ignore
+        target_image: NDArray[Any],
+        mask_img: NDArray[Any],  # type:ignore
         surplus: Size,
         left_top_point: Pointer,
         mask_size: Size,
@@ -95,38 +95,29 @@ class Imposer:
         for c in range(0, 3):
             only_mask = alpha_s * mask_img[: mask_size.h, : mask_size.w, c]
             if not surplus.h and not surplus.w:
-                target_image.img[left_top_point.y:, left_top_point.x:, c] = (
+                target_image[left_top_point.y:, left_top_point.x:, c] = (
                     only_mask
-                    + alpha_l
-                    * target_image.img[left_top_point.y:, left_top_point.x:, c]
+                    + alpha_l * target_image[left_top_point.y:, left_top_point.x:, c]
                 )
             elif surplus.h and not surplus.w:
-                target_image.img[
-                    left_top_point.y: -surplus.h, left_top_point.x:, c
-                ] = (
+                target_image[left_top_point.y: -surplus.h, left_top_point.x:, c] = (
                     only_mask
                     + alpha_l
-                    * target_image.img[
-                        left_top_point.y: -surplus.h, left_top_point.x:, c
-                    ]
+                    * target_image[left_top_point.y: -surplus.h, left_top_point.x:, c]
                 )
             elif not surplus.h and surplus.w:
-                target_image.img[
-                    left_top_point.y:, left_top_point.x: -surplus.w, c
-                ] = (
+                target_image[left_top_point.y:, left_top_point.x: -surplus.w, c] = (
                     only_mask
                     + alpha_l
-                    * target_image.img[
-                        left_top_point.y:, left_top_point.x: -surplus.w, c
-                    ]
+                    * target_image[left_top_point.y:, left_top_point.x: -surplus.w, c]
                 )
             elif surplus.h and surplus.w:
-                target_image.img[
+                target_image[
                     left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c
                 ] = (
                     only_mask
                     + alpha_l
-                    * target_image.img[
+                    * target_image[
                         left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c
                     ]
                 )
@@ -134,22 +125,23 @@ class Imposer:
     def _draw_landmarks(
         self,
         landmarks_dict: Dict[int, Tuple[int, int]],
-        image: Image,
+        image: NDArray[Any],
         left_top_point: Pointer,
-    ) -> None:
+    ) -> NDArray[Any]:
         """Draw landmarks on output images according to flag."""
         if self._should_draw_landmarks:
             for v in landmarks_dict.values():
                 try:
-                    image.img = cv2.circle(image.img, v, 2, (255, 0, 0), 2)
+                    image = cv2.circle(image, v, 2, (255, 0, 0), 2)
                 except cv2.error:
                     pass
-            image.img = cv2.circle(
-                image.img, (left_top_point.x, left_top_point.y), 2, (255, 0, 0), 2
+            image = cv2.circle(
+                image, (left_top_point.x, left_top_point.y), 2, (255, 0, 0), 2
             )
+        return image
 
     def _paste_mask(
-        self, target_image: Image, landmarks_dict: Dict[int, Tuple[int, int]]
+        self, target_image: NDArray[Any], landmarks_dict: Dict[int, Tuple[int, int]]
     ) -> None:
         """Pastes mask image on target in place according to detected landmarks on original image
 
@@ -158,9 +150,7 @@ class Imposer:
         scaled_mask_img, pointer_map = self._mask.scale_to(landmarks_dict)
         left_top_point = self._fit_left_top_coords(landmarks_dict, pointer_map)
 
-        replaced_box_primitive = target_image.img[
-            left_top_point.y:, left_top_point.x:
-        ]
+        replaced_box_primitive = target_image[left_top_point.y:, left_top_point.x:]
         mask_limits = Size(*replaced_box_primitive.shape[:-1])
 
         surplus = Size(
@@ -173,9 +163,11 @@ class Imposer:
         self._cut_paste(
             target_image, scaled_mask_img, surplus, left_top_point, mask_limits
         )
-        self._draw_landmarks(landmarks_dict, target_image, left_top_point)
         if self._show_samples:
-            cv2.imshow("Result", target_image.img)
+            cv2.imshow(
+                "Result",
+                self._draw_landmarks(landmarks_dict, target_image, left_top_point),
+            )
             cv2.waitKey(0)
 
     def _determine_safe_output_dir(self) -> None:
@@ -213,16 +205,22 @@ class Imposer:
             join(self._output_dir, f"{filename}.{self._output_format}"), image.img
         )
 
-    def impose(self, landmarks_collection: detections_dict) -> List[NDArray[Any]]:
+    def impose(
+        self, landmarks_collection: detections_dict, fake_map
+    ) -> Union[NDArray[Any], List[NDArray[Any]]]:
         """Imposes mask image on images stored as a dictionary keys in landmarks detections."""
         if not self.live_imposing:
             self._create_output_dir()
         masked_images = []
         for image_fp, landmarks_dict in landmarks_collection.items():
             if "masked" not in image_fp:
-                img_obj = Image(image_fp)
-                self._paste_mask(img_obj, landmarks_dict)
+                img_obj = Image(
+                    image_fp if fake_map is None else (fake_map[image_fp], image_fp)
+                )
+                self._paste_mask(img_obj.img, landmarks_dict)
                 masked_images.append(img_obj.img)
+
                 if not self.live_imposing:
                     self.save(get_name_from(image_fp), img_obj)
+
         return masked_images

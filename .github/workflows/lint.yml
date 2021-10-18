@@ -14,4 +14,5 @@ jobs:
           python-root-list: 'mask_imposer tests'
           use-black: false
           use-isort: false
+          use-mypy: false
           extra-pycodestyle-options: "--max-line-length=99"
