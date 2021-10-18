@@ -77,8 +77,8 @@ class MaskImposer:
 
 # if __name__ == '__main__':
 #     np_arr = cv2.imread(
-#               "/home/popis/Documents/mask-imposer/tests/integration/data/input/sample.jpeg"
-#               )
+#     "/home/popis/Documents/mask-imposer/tests/integration/data/input/sample.jpeg"
+#     )
 #     mim = MaskImposer()
 #     rs = mim.impose_mask((np_arr, "/home/popis/Downloads/sample_unique_name.jpeg"), show=True)
 #     cv2.imwrite("test.png", rs)
