@@ -52,6 +52,15 @@ class PythonPackageTestCase(TestCase):
     def test_should_impose_mask_on_image_from_numpy_array(self) -> None:
         self.imp.impose_mask((cv2.imread(self.test_img_path), "fake_mask"), show=True)
 
+    def test_should_switch_mask(self) -> None:
+        self.imp.impose_mask((cv2.imread(self.test_img_path), "fake_mask"), show=True)
+        self.imp.switch_mask(2)
+        self.imp.impose_mask((cv2.imread(self.test_img_path), "fake_mask"), show=True)
+
+    def test_should_set_black_rect_instead_of_mask(self) -> None:
+        self.imp.switch_mask(0)
+        self.imp.impose_mask((cv2.imread(self.test_img_path), "fake_mask"), show=True)
+
     def test_should_imposing_results_be_same_for_path_and_numpy_array_way(self):
         m1 = self.imp.impose_mask((cv2.imread(self.test_img_path), "fake_mask"), show=False)
         m2 = self.imp.impose_mask(self.test_img_path, show=False)
