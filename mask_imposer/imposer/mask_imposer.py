@@ -50,6 +50,10 @@ class Imposer:
         self._show_samples = improvements.show_samples
         self._mask = MaskImage(mask_set)
 
+    def switch_mask_set(self, mask_set: MaskSet) -> None:
+        """Switches mask image."""
+        self._mask = MaskImage(mask_set)
+
     @staticmethod
     def _fit_left_top_coords(
         landmarks_dict: Dict[int, Tuple[int, int]], mask_pointers_map: PointerMap

@@ -45,14 +45,12 @@ def _parse_args() -> Namespace:
     parser.add_argument("--off-face-detection", action="store_true",
                         help="Before landmark prediction detect face box.")
     parser.add_argument("--mask-coords", type=str, default=None,
-                        # "mask_imposer/bundled/set_01/mask_coords.json",
-                        help="Custom mask image path.")
-    parser.add_argument("--mask-img", type=str, default=None,
                         help="Custom mask characteristic [2,9,16,29]"
                              " landmarks coordinates json filepath.")
-    parser.add_argument("--use-bundled-mask", type=int, default=1, choices=[1, 2],
-                        help="Custom mask characteristic [2,9,16,29] "
-                             "landmarks coordinates json filepath.")
+    parser.add_argument("--mask-img", type=str, default=None,
+                        help="Custom mask image path.")
+    parser.add_argument("--use-bundled-mask", type=int, default=1, choices=[0, 1, 2],
+                        help="Index to bundled mask set [0, 1, 2]")
     return parser.parse_args()
 
 
