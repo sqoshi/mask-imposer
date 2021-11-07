@@ -43,6 +43,10 @@ class MaskImposer:
             logger=self._logger
         )
 
+    def switch_mask(self, bundled_mask_set_idx: int) -> None:
+        """Switches mask set in mask imposer."""
+        self._imposer.switch_mask_set(_get_bundled_mask_set(bundled_mask_set_idx))
+
     def impose_mask(
             self, image: Union[str, List[str]], show: bool = False
     ) -> Union[NDArray[Any], List[NDArray[Any]]]:
