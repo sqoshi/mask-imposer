@@ -1,7 +1,5 @@
 termcolor>=1.1.0
 setuptools==44.0.0
-dlib>=19.22.0
-progressbar==2.5
 pip>=20.0.2
 numpy>=1.21.1
 opencv-python>=4.5.3.56
@@ -19,4 +17,5 @@ pytest>=6.2.4
 mypy>=0.770
 isort>=5.9.2
 pylint>=2.9.6
-
+git+https://github.com/sqoshi/landmark-predictor.git
+coloredlogs==15.0.1

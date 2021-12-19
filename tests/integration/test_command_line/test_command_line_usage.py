@@ -14,7 +14,7 @@ import run
 def sorted_by_fn(directory) -> List[str]:
     return sorted(
         [os.path.join(directory, f) for f in os.listdir(directory)],
-        key=lambda x: Path(x).name
+        key=lambda x: Path(x).name,
     )
 
 
@@ -32,10 +32,10 @@ class CommandLineUsageTestCase(TestCase):
             "",
             os.path.join(f"{self.test_dir}", "..", "data", "input"),
             "--output-dir",
-            results_dir
+            results_dir,
         ]
 
-        with patch.object(sys, 'argv', testargs):
+        with patch.object(sys, "argv", testargs):
             run.main()
 
         actual_paths = sorted_by_fn(results_dir)

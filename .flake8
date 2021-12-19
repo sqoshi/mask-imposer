@@ -1,7 +1,8 @@
 [flake8]
 ignore =
     F401,
-    W503
+    W503,
+    E203
 
 max-complexity = 10
 min-similarity-lines = 300

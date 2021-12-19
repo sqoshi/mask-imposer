@@ -19,15 +19,23 @@ class CoordinatesCollector:
         self.mask_coords: Optional[Dict[int, Pointer]] = None
 
     def _capture_event(
-            self, event: cv2.cuda_Event, x: int, y: int,
-            flags: List[Any], params: List[Any]  # pylint:disable=W0613
+        self,
+        event: cv2.cuda_Event,
+        x: int,
+        y: int,
+        flags: List[Any],  # pylint:disable=W0613
+        params: List[Any],  # pylint:disable=W0613
     ) -> None:
         """Captures coordinates from left/ middle mouse click event inside image."""
-        if event in {cv2.EVENT_LBUTTONDBLCLK, cv2.EVENT_MBUTTONDBLCLK} \
-                and len(self.candidates) <= 4:
-            print(colored("Marked ", "yellow")
-                  + colored(f"[{x}, {y}]", "green")
-                  + colored(" point.", "yellow"))
+        if (
+            event in {cv2.EVENT_LBUTTONDBLCLK, cv2.EVENT_MBUTTONDBLCLK}
+            and len(self.candidates) <= 4
+        ):
+            print(
+                colored("Marked ", "yellow")
+                + colored(f"[{x}, {y}]", "green")
+                + colored(" point.", "yellow")
+            )
             cv2.circle(self.img, (x, y), int(self.img.shape[0] / 40), (255, 0, 0), -1)
             self.candidates.append([x, y])
 
@@ -61,15 +69,13 @@ class CoordinatesCollector:
             2: Pointer(*min(self.candidates, key=lambda x: x[0])),
             9: Pointer(*max(self.candidates, key=lambda x: x[1])),
             16: Pointer(*max(self.candidates, key=lambda x: x[0])),
-            29: Pointer(*min(self.candidates, key=lambda x: x[1]))
+            29: Pointer(*min(self.candidates, key=lambda x: x[1])),
         }
 
     @staticmethod
     def _confirm_coords() -> bool:
         """Ask user to confirm inputted coords with empty string, y or yes."""
-        response = input(
-            colored("Are points correctly assigned?: [Y/n]\n", "yellow")
-        )
+        response = input(colored("Are points correctly assigned?: [Y/n]\n", "yellow"))
         return response.lower() in {"y", "yes", ""}
 
     def reset(self) -> Optional[Dict[int, Pointer]]:

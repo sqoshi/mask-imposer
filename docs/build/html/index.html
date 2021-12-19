@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to MaskImposer’s documentation! &mdash; MaskImposer 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> MaskImposer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to MaskImposer’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#mask-imposer">Mask imposer 😷</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of contents</a></li>
+<li><a class="reference internal" href="#id2">Introduction</a></li>
+<li><a class="reference internal" href="#id3">General</a><ul>
+<li><a class="reference internal" href="#input-inspection"><code class="docutils literal notranslate"><span class="pre">Input</span> <span class="pre">inspection</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">Detection</span></code></a><ul>
+<li><a class="reference internal" href="#id5">Important landmarks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">Imposition</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">Installation</a></li>
+<li><a class="reference internal" href="#id9">Usage</a><ul>
+<li><a class="reference internal" href="#id10">Command Line Tool</a></li>
+<li><a class="reference internal" href="#id11">Options</a></li>
+<li><a class="reference internal" href="#id12">Custom Mask</a></li>
+<li><a class="reference internal" href="#id19">Workflow</a></li>
+<li><a class="reference internal" href="#id20">Python Package</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id21">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">MaskImposer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>Welcome to MaskImposer’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-maskimposer-s-documentation">
+<h1>Welcome to MaskImposer’s documentation!<a class="headerlink" href="#welcome-to-maskimposer-s-documentation" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+<section id="mask-imposer">
+<h1>Mask imposer 😷<a class="headerlink" href="#mask-imposer" title="Permalink to this headline"></a></h1>
+<p>Command line tool and python package to overlay fake face masks.</p>
+<p>Project is a part of series related with my Bachelor of Science Thesis research.</p>
+<section id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#introduction">Introduction</a></p></li>
+<li><p><a class="reference external" href="#general">General</a></p>
+<ul>
+<li><p><a class="reference external" href="#input-inspection">Inspection</a></p></li>
+<li><p><a class="reference external" href="#imposition">Imposition</a></p></li>
+<li><p><a class="reference external" href="#detection">Detection</a></p>
+<ul>
+<li><p><a class="reference external" href="#important-landmarks">Important landmarks</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#imposition">Imposition</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#installation">Installation</a></p></li>
+<li><p><a class="reference external" href="#usage">Usage</a></p>
+<ul>
+<li><p><a class="reference external" href="#command-line-tool">Command line tool</a></p>
+<ul>
+<li><p><a class="reference external" href="#options">Options</a></p>
+<ul>
+<li><p><a class="reference external" href="#custom-mask">Custom mask</a></p></li>
+<li><p><a class="reference external" href="#workflow">Workflow</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#python-package">Python package</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#documentation">Documentation</a></p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>Introduction<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<p>Mask imposer is a tool for overlaying face mask over human central faces.</p>
+<p>Application main purpose is to make fake datasets of people in face masks. Since there is no
+available free dataset, application is useful in machine or deep learning in classification/
+recognition problems.</p>
+</section>
+<section id="id3">
+<h2>General<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">How</span> <span class="pre">it</span> <span class="pre">works?</span></code></p>
+<section id="input-inspection">
+<h3><code class="docutils literal notranslate"><span class="pre">Input</span> <span class="pre">inspection</span></code><a class="headerlink" href="#input-inspection" title="Permalink to this headline"></a></h3>
+<p>At the beginning program reading images from given input directory and validates images.</p>
+</section>
+<section id="id4">
+<h3><code class="docutils literal notranslate"><span class="pre">Detection</span></code><a class="headerlink" href="#id4" title="Permalink to this headline"></a></h3>
+<p>Program detects 68 landmarks using some simple model
+found <a class="reference external" href="&quot;http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2&quot;">here</a>.</p>
+<a class="reference external image-reference" href="docs/.readme_media/68landmarks.png"><img alt="68landmarks.png" src="docs/.readme_media/68landmarks.png" /></a>
+<section id="id5">
+<h4>Important landmarks<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h4>
+<p>For now program requires only 4 of them:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">left</span></code> - <em>2</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right</span></code> - <em>16</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">top</span></code> - <em>29</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bottom</span></code> - <em>9</em></p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h3><code class="docutils literal notranslate"><span class="pre">Imposition</span></code><a class="headerlink" href="#id6" title="Permalink to this headline"></a></h3>
+<p>When landmarks have been detected, program is reading mask image with some hardcoded coordinates (
+X,Y) responding to all indexes mentioned in <a class="reference external" href="#important-landmarks">previous paragraph</a>.</p>
+<a class="reference external image-reference" href="docs/.readme_media/points.png"><img alt="mask.png" src="docs/.readme_media/points.png" /></a>
+<p>Red dots are points responding to <em>left</em>, <em>right</em>, <em>top</em> and <em>bottom</em> landmark defined
+<a class="reference external" href="#important-landmarks">here</a>.</p>
+<p>In next state program computes distances between opposite dots in vertical and horizontal way.</p>
+<a class="reference external image-reference" href="docs/.readme_media/lines.png"><img alt="lines.png" src="docs/.readme_media/lines.png" /></a>
+<p>As almost last step program scales mask until above distances are equal to responding distances
+between landmarks found in target image.</p>
+<a class="reference external image-reference" href="docs/.readme_media/example_landmarks.png"><img alt="example_landmarks.png" src="docs/.readme_media/example_landmarks.png" /></a>
+<p>For now protruding part of the face mask is being cut and saved in output directory (
+default=<code class="docutils literal notranslate"><span class="pre">results</span></code>).</p>
+<a class="reference external image-reference" href="docs/.readme_media/example_res2.png"><img alt="example_res2.png" src="docs/.readme_media/example_res2.png" /></a>
+</section>
+</section>
+<section id="id8">
+<h2>Installation<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/sqoshi/mask-imposer.git
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h2>Usage<a class="headerlink" href="#id9" title="Permalink to this headline"></a></h2>
+<section id="id10">
+<h3>Command Line Tool<a class="headerlink" href="#id10" title="Permalink to this headline"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mim</span> <span class="n">INPUT_DIR</span> <span class="o">--</span><span class="n">option</span> <span class="n">argument</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3>Options<a class="headerlink" href="#id11" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>input_dir</p></td>
+<td><p>✔️</p></td>
+<td><p>–</p></td>
+<td><p>Input directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p>–output-dir</p></td>
+<td><p>❌</p></td>
+<td><p>results</p></td>
+<td><p>Output directory.</p></td>
+</tr>
+<tr class="row-even"><td><p>–output-format</p></td>
+<td><p>❌</p></td>
+<td><p>png</p></td>
+<td><p>Output images format.</p></td>
+</tr>
+<tr class="row-odd"><td><p>–shape-predictor</p></td>
+<td><p>❌</p></td>
+<td><p>None</p></td>
+<td><p>Path to shape predictor.</p></td>
+</tr>
+<tr class="row-even"><td><p>–show-samples</p></td>
+<td><p>❌</p></td>
+<td><p>False</p></td>
+<td><p>Show sample after detection.</p></td>
+</tr>
+<tr class="row-odd"><td><p>–draw-landmarks</p></td>
+<td><p>❌</p></td>
+<td><p>False</p></td>
+<td><p>Draw circles on detected landmarks coords.</p></td>
+</tr>
+<tr class="row-even"><td><p>–detect-face-boxes</p></td>
+<td><p>❌</p></td>
+<td><p>False</p></td>
+<td><p>Before landmark prediction detect face box.</p></td>
+</tr>
+<tr class="row-odd"><td><p>–use-bundled-mask</p></td>
+<td><p>❌</p></td>
+<td><p>1</p></td>
+<td><p>Program offers some bundled (default) masks, choices (1,2)</p></td>
+</tr>
+<tr class="row-even"><td><p>–mask-coords</p></td>
+<td><p>❌</p></td>
+<td><p>None</p></td>
+<td><p>Custom mask characteristic <code class="docutils literal notranslate"><span class="pre">[2,9,16,29]</span></code> landmarks coordinates json filepath.</p></td>
+</tr>
+<tr class="row-odd"><td><p>–mask-img</p></td>
+<td><p>❌</p></td>
+<td><p>None</p></td>
+<td><p>Custom mask image filepath.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id12">
+<h3>Custom Mask<a class="headerlink" href="#id12" title="Permalink to this headline"></a></h3>
+<p>Mask maybe inputted via terminal by using flag <code class="docutils literal notranslate"><span class="pre">--mask-img</span></code>. Then mask image popup on the screen
+and program asks user to interactively mark characteristic points on displayed image.</p>
+<p>If flag <code class="docutils literal notranslate"><span class="pre">--mask-img</span></code> would be combined with <code class="docutils literal notranslate"><span class="pre">--mask-coords</span></code> then characteristic points will be read
+from inputted filepath.</p>
+<p>Using custom mask requires inputting a <em>path to mask image</em> or <a href="#id13"><span class="problematic" id="id14">*</span></a>path to mask image and a path to
+json with <a class="reference external" href="#important-landmarks">important landmarks</a><a href="#id16"><span class="problematic" id="id17">*</span></a>.</p>
+<p>Image requirements:</p>
+<ul class="simple">
+<li><p>Mask must fit image size as much as only possible.</p></li>
+<li><p>Mask image must have not got background. Background maybe removed simply by online tools
+like <a class="reference external" href="https://www.remove.bg/">removebg</a></p></li>
+</ul>
+<p>Example:</p>
+<a class="reference external image-reference" href="mask_imposer/bundled/set_02/mask_image.png"><img alt="example image" src="mask_imposer/bundled/set_02/mask_image.png" /></a>
+<p>Coordinates file requirements:</p>
+<ul class="simple">
+<li><p>Keys must match <a class="reference external" href="#important-landmarks">important landmarks</a></p></li>
+<li><p>Values must be a 2-elements list and respond to <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">Y)</span></code> order.</p></li>
+<li><p>Point (0,0) is in left top corner of image.</p></li>
+</ul>
+<p>Example <code class="docutils literal notranslate"><span class="pre">mask_coords.json</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;2&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">15</span><span class="p">,</span>
+    <span class="mi">50</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;9&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">185</span><span class="p">,</span>
+    <span class="mi">310</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;16&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">365</span><span class="p">,</span>
+    <span class="mi">50</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;29&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">185</span><span class="p">,</span>
+    <span class="mi">20</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id19">
+<h3>Workflow<a class="headerlink" href="#id19" title="Permalink to this headline"></a></h3>
+<ol class="arabic">
+<li><p>Prepare images with center faces. Face zoom improves the results quality.</p>
+<a class="reference external image-reference" href="docs/.readme_media/example_pre.png"><img alt="example_pre.png" src="docs/.readme_media/example_pre.png" /></a>
+</li>
+<li><p>Move images to directory and pass it via below command.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mim</span> <span class="n">input_directory</span>
+</pre></div>
+</div>
+</li>
+<li><p>Check out results stored as default in <code class="docutils literal notranslate"><span class="pre">results</span></code> directory under current directory.</p>
+<a class="reference external image-reference" href="docs/.readme_media/example_res.png"><img alt="example_res.png" src="docs/.readme_media/example_res.png" /></a>
+</li>
+</ol>
+</section>
+<section id="id20">
+<h3>Python Package<a class="headerlink" href="#id20" title="Permalink to this headline"></a></h3>
+<p>Program is also programmatically usable.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mask_imposer</span> <span class="kn">import</span> <span class="n">MaskImposer</span>
+
+<span class="n">mim</span> <span class="o">=</span> <span class="n">MaskImposer</span><span class="p">()</span>
+
+<span class="n">masked_images</span> <span class="o">=</span> <span class="n">mim</span><span class="o">.</span><span class="n">impose_mask</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;/path/to/img1.png&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">masked_images</span><span class="p">):</span>
+    <span class="n">mim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;5masked_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id21">
+<h2>Documentation<a class="headerlink" href="#id21" title="Permalink to this headline"></a></h2>
+<p>Generation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">nano</span> <span class="n">docs</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">py</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">docs</span>
+<span class="mf">2.</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">apidoc</span> <span class="o">-</span><span class="n">o</span> <span class="n">source</span> <span class="o">../</span><span class="n">mask_imposer</span>
+<span class="mf">3.</span> <span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>Local usage:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> docs
+make html
+</pre></div>
+</div>
+<img alt="_images/68landmarks.png" src="_images/68landmarks.png" />
+<img alt="_images/points.png" src="_images/points.png" />
+<img alt="_images/lines.png" src="_images/lines.png" />
+<img alt="_images/example_landmarks.png" src="_images/example_landmarks.png" />
+<img alt="_images/example_res2.png" src="_images/example_res2.png" />
+<img alt="_images/example_pre.png" src="_images/example_pre.png" />
+<img alt="_images/example_res.png" src="_images/example_res.png" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Piotr Popis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

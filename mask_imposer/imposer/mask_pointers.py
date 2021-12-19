@@ -17,7 +17,7 @@ class Pointer:
         self.y = y
 
     def scaled(
-            self, x_scale: Union[int, float], y_scale: Union[int, float]
+        self, x_scale: Union[int, float], y_scale: Union[int, float]
     ) -> Tuple[int, int]:
         """Returns scaled coordinates, but not affect current object state."""
         return int(self.x * x_scale), int(self.y * y_scale)
@@ -59,7 +59,9 @@ def _create_map(fp: str) -> Dict[int, Pointer]:
 class PointerMap:
     """Mapping pointers to characteristic mask points."""
 
-    def __init__(self, input_points: Optional[Union[Dict[int, Pointer], str]] = None) -> None:
+    def __init__(
+        self, input_points: Optional[Union[Dict[int, Pointer], str]] = None
+    ) -> None:
         """Pointers are hardcoded to a default image."""
         # hardcoded by standard mask image.
         self._left_index = 2
@@ -133,7 +135,7 @@ class PointerMap:
         return self.get_left_point().x
 
     def updated_points(
-            self, x_scale: Union[int, float], y_scale: Union[int, float]
+        self, x_scale: Union[int, float], y_scale: Union[int, float]
     ) -> Dict[int, Pointer]:
         """Scales all points by appropriate scales.
 
@@ -146,7 +148,7 @@ class PointerMap:
         return new_points
 
     def new_scaled_map(  # type:ignore
-            self, x_scale: Union[int, float], y_scale: Union[int, float]
+        self, x_scale: Union[int, float], y_scale: Union[int, float]
     ):
         """Builds a new map scaled to given scales."""
         return PointerMap(self.updated_points(x_scale, y_scale))

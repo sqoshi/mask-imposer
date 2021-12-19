@@ -3,16 +3,16 @@ import shutil
 import time
 from logging import Logger
 from os.path import join
-from typing import Any, Dict, Tuple, Union, Optional, List
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import cv2
+from landmarks_predictor.landmarks_predictor import Image
 from numpy.typing import NDArray
 from termcolor import colored
 
 from mask_imposer.imposer.mask_pointers import Pointer, PointerMap
 
 from ..definitions import ImageFormat, Improvements, MaskSet, Output, Size
-from ..detector.image import Image
 from .mask_image import MaskImage
 
 
@@ -99,30 +99,30 @@ class Imposer:
         for c in range(0, 3):
             only_mask = alpha_s * mask_img[: mask_size.h, : mask_size.w, c]
             if not surplus.h and not surplus.w:
-                target_image[left_top_point.y:, left_top_point.x:, c] = (
+                target_image[left_top_point.y :, left_top_point.x :, c] = (
                     only_mask
-                    + alpha_l * target_image[left_top_point.y:, left_top_point.x:, c]
+                    + alpha_l * target_image[left_top_point.y :, left_top_point.x :, c]
                 )
             elif surplus.h and not surplus.w:
-                target_image[left_top_point.y: -surplus.h, left_top_point.x:, c] = (
+                target_image[left_top_point.y : -surplus.h, left_top_point.x :, c] = (
                     only_mask
                     + alpha_l
-                    * target_image[left_top_point.y: -surplus.h, left_top_point.x:, c]
+                    * target_image[left_top_point.y : -surplus.h, left_top_point.x :, c]
                 )
             elif not surplus.h and surplus.w:
-                target_image[left_top_point.y:, left_top_point.x: -surplus.w, c] = (
+                target_image[left_top_point.y :, left_top_point.x : -surplus.w, c] = (
                     only_mask
                     + alpha_l
-                    * target_image[left_top_point.y:, left_top_point.x: -surplus.w, c]
+                    * target_image[left_top_point.y :, left_top_point.x : -surplus.w, c]
                 )
             elif surplus.h and surplus.w:
                 target_image[
-                    left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c
+                    left_top_point.y : -surplus.h, left_top_point.x : -surplus.w, c
                 ] = (
                     only_mask
                     + alpha_l
                     * target_image[
-                        left_top_point.y: -surplus.h, left_top_point.x: -surplus.w, c
+                        left_top_point.y : -surplus.h, left_top_point.x : -surplus.w, c
                     ]
                 )
 
@@ -154,7 +154,7 @@ class Imposer:
         scaled_mask_img, pointer_map = self._mask.scale_to(landmarks_dict)
         left_top_point = self._fit_left_top_coords(landmarks_dict, pointer_map)
 
-        replaced_box_primitive = target_image[left_top_point.y:, left_top_point.x:]
+        replaced_box_primitive = target_image[left_top_point.y :, left_top_point.x :]
         mask_limits = Size(*replaced_box_primitive.shape[:-1])
 
         surplus = Size(
@@ -210,7 +210,9 @@ class Imposer:
         )
 
     def impose(
-        self, landmarks_collection: detections_dict, fake_map
+        self,
+        landmarks_collection: detections_dict,
+        fake_map: Optional[Dict[str, Tuple[int, int]]],
     ) -> Union[NDArray[Any], List[NDArray[Any]]]:
         """Imposes mask image on images stored as a dictionary keys in landmarks detections."""
         if not self.live_imposing:

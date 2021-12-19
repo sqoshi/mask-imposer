@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mask_imposer.imposer package &mdash; MaskImposer 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> MaskImposer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">mask_imposer.imposer package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-mask_imposer.imposer.mask_image">mask_imposer.imposer.mask_image module</a></li>
+<li><a class="reference internal" href="#module-mask_imposer.imposer.mask_imposer">mask_imposer.imposer.mask_imposer module</a></li>
+<li><a class="reference internal" href="#module-mask_imposer.imposer.mask_pointers">mask_imposer.imposer.mask_pointers module</a></li>
+<li><a class="reference internal" href="#module-mask_imposer.imposer">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MaskImposer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>mask_imposer.imposer package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mask_imposer.imposer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mask-imposer-imposer-package">
+<h1>mask_imposer.imposer package<a class="headerlink" href="#mask-imposer-imposer-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-mask_imposer.imposer.mask_image">
+<span id="mask-imposer-imposer-mask-image-module"></span><h2>mask_imposer.imposer.mask_image module<a class="headerlink" href="#module-mask_imposer.imposer.mask_image" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_image.MaskImage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mask_imposer.imposer.mask_image.</span></span><span class="sig-name descname"><span class="pre">MaskImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mask_imposer.definitions.html#mask_imposer.definitions.namedtuples.MaskSet" title="mask_imposer.definitions.namedtuples.MaskSet"><span class="pre">mask_imposer.definitions.namedtuples.MaskSet</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mask_imposer.imposer.mask_image.MaskImage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">landmarks_predictor.image.Image</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_image.MaskImage.resized">
+<span class="sig-name descname"><span class="pre">resized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#mask_imposer.imposer.mask_pointers.PointerMap" title="mask_imposer.imposer.mask_pointers.PointerMap"><span class="pre">mask_imposer.imposer.mask_pointers.PointerMap</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_image.MaskImage.resized" title="Permalink to this definition"></a></dt>
+<dd><p>We measure distance between opposite points left/right and top/bottom
+on mask and target image and scale mask to make this distances equal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_image.MaskImage.scale_to">
+<span class="sig-name descname"><span class="pre">scale_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">landmarks_dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.typing._generic_alias.ScalarType</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#mask_imposer.imposer.mask_pointers.PointerMap" title="mask_imposer.imposer.mask_pointers.PointerMap"><span class="pre">mask_imposer.imposer.mask_pointers.PointerMap</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_image.MaskImage.scale_to" title="Permalink to this definition"></a></dt>
+<dd><p>Computes distances to which mask image should be resized and resizes it.</p>
+<p>Accordingly to detected landmarks.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mask_imposer.imposer.mask_imposer">
+<span id="mask-imposer-imposer-mask-imposer-module"></span><h2>mask_imposer.imposer.mask_imposer module<a class="headerlink" href="#module-mask_imposer.imposer.mask_imposer" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_imposer.Imposer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mask_imposer.imposer.mask_imposer.</span></span><span class="sig-name descname"><span class="pre">Imposer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mask_imposer.definitions.html#mask_imposer.definitions.namedtuples.Output" title="mask_imposer.definitions.namedtuples.Output"><span class="pre">mask_imposer.definitions.namedtuples.Output</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mask_imposer.definitions.html#mask_imposer.definitions.namedtuples.MaskSet" title="mask_imposer.definitions.namedtuples.MaskSet"><span class="pre">mask_imposer.definitions.namedtuples.MaskSet</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">improvements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mask_imposer.definitions.html#mask_imposer.definitions.namedtuples.Improvements" title="mask_imposer.definitions.namedtuples.Improvements"><span class="pre">mask_imposer.definitions.namedtuples.Improvements</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">logging.Logger</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mask_imposer.imposer.mask_imposer.Imposer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class overlay mask image on front face according to detected landmarks.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_imposer.Imposer.impose">
+<span class="sig-name descname"><span class="pre">impose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">landmarks_collection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fake_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_imposer.Imposer.impose" title="Permalink to this definition"></a></dt>
+<dd><p>Imposes mask image on images stored as a dictionary keys in landmarks detections.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_imposer.Imposer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">landmarks_predictor.image.Image</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_imposer.Imposer.save" title="Permalink to this definition"></a></dt>
+<dd><p>Save image with filename in output_format.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_imposer.Imposer.switch_mask_set">
+<span class="sig-name descname"><span class="pre">switch_mask_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mask_imposer.definitions.html#mask_imposer.definitions.namedtuples.MaskSet" title="mask_imposer.definitions.namedtuples.MaskSet"><span class="pre">mask_imposer.definitions.namedtuples.MaskSet</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_imposer.Imposer.switch_mask_set" title="Permalink to this definition"></a></dt>
+<dd><p>Switches mask image.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_imposer.get_name_from">
+<span class="sig-prename descclassname"><span class="pre">mask_imposer.imposer.mask_imposer.</span></span><span class="sig-name descname"><span class="pre">get_name_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_imposer.get_name_from" title="Permalink to this definition"></a></dt>
+<dd><p>Gouge filename without format/extension from path.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_imposer.non_negative">
+<span class="sig-prename descclassname"><span class="pre">mask_imposer.imposer.mask_imposer.</span></span><span class="sig-name descname"><span class="pre">non_negative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_imposer.non_negative" title="Permalink to this definition"></a></dt>
+<dd><p>Returns 0 if diff is negative or positive value.</p>
+</dd></dl>
+
+</section>
+<section id="module-mask_imposer.imposer.mask_pointers">
+<span id="mask-imposer-imposer-mask-pointers-module"></span><h2>mask_imposer.imposer.mask_pointers module<a class="headerlink" href="#module-mask_imposer.imposer.mask_pointers" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.Pointer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mask_imposer.imposer.mask_pointers.</span></span><span class="sig-name descname"><span class="pre">Pointer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.Pointer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Coordinates x,y wrapper*.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.Pointer.scale">
+<span class="sig-name descname"><span class="pre">scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.Pointer.scale" title="Permalink to this definition"></a></dt>
+<dd><p>Scale current coordinates.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.Pointer.scaled">
+<span class="sig-name descname"><span class="pre">scaled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.Pointer.scaled" title="Permalink to this definition"></a></dt>
+<dd><p>Returns scaled coordinates, but not affect current object state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.Pointer.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.Pointer.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update current coordinates.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mask_imposer.imposer.mask_pointers.</span></span><span class="sig-name descname"><span class="pre">PointerMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#mask_imposer.imposer.mask_pointers.Pointer" title="mask_imposer.imposer.mask_pointers.Pointer"><span class="pre">mask_imposer.imposer.mask_pointers.Pointer</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mapping pointers to characteristic mask points.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_bottom_index">
+<span class="sig-name descname"><span class="pre">get_bottom_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_bottom_index" title="Permalink to this definition"></a></dt>
+<dd><p>Index of bottom point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_bottom_point">
+<span class="sig-name descname"><span class="pre">get_bottom_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mask_imposer.imposer.mask_pointers.Pointer" title="mask_imposer.imposer.mask_pointers.Pointer"><span class="pre">mask_imposer.imposer.mask_pointers.Pointer</span></a></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_bottom_point" title="Permalink to this definition"></a></dt>
+<dd><p>Bottom point is the lowest point chin.</p>
+<p>More details available in readme.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_included_indexes">
+<span class="sig-name descname"><span class="pre">get_included_indexes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_included_indexes" title="Permalink to this definition"></a></dt>
+<dd><p>List of used landmarks indexes (according to readme landmarks scheme).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_left_index">
+<span class="sig-name descname"><span class="pre">get_left_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_left_index" title="Permalink to this definition"></a></dt>
+<dd><p>Index of left point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_left_offset">
+<span class="sig-name descname"><span class="pre">get_left_offset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_left_offset" title="Permalink to this definition"></a></dt>
+<dd><p>Distance from left image limit to the closest to the left point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_left_point">
+<span class="sig-name descname"><span class="pre">get_left_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mask_imposer.imposer.mask_pointers.Pointer" title="mask_imposer.imposer.mask_pointers.Pointer"><span class="pre">mask_imposer.imposer.mask_pointers.Pointer</span></a></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_left_point" title="Permalink to this definition"></a></dt>
+<dd><p>Left point is a one of point from left jaw.</p>
+<p>More details available in readme.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_right_index">
+<span class="sig-name descname"><span class="pre">get_right_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_right_index" title="Permalink to this definition"></a></dt>
+<dd><p>Index of right point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_right_point">
+<span class="sig-name descname"><span class="pre">get_right_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mask_imposer.imposer.mask_pointers.Pointer" title="mask_imposer.imposer.mask_pointers.Pointer"><span class="pre">mask_imposer.imposer.mask_pointers.Pointer</span></a></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_right_point" title="Permalink to this definition"></a></dt>
+<dd><p>Right point is a one of point from right jaw.</p>
+<p>More details available in readme.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_top_index">
+<span class="sig-name descname"><span class="pre">get_top_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_top_index" title="Permalink to this definition"></a></dt>
+<dd><p>Index of top point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_top_offset">
+<span class="sig-name descname"><span class="pre">get_top_offset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_top_offset" title="Permalink to this definition"></a></dt>
+<dd><p>Distance from top image limit to highest (top) point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.get_top_point">
+<span class="sig-name descname"><span class="pre">get_top_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mask_imposer.imposer.mask_pointers.Pointer" title="mask_imposer.imposer.mask_pointers.Pointer"><span class="pre">mask_imposer.imposer.mask_pointers.Pointer</span></a></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.get_top_point" title="Permalink to this definition"></a></dt>
+<dd><p>Top point is any point from middle of nose.</p>
+<p>More details available in readme.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.new_scaled_map">
+<span class="sig-name descname"><span class="pre">new_scaled_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.new_scaled_map" title="Permalink to this definition"></a></dt>
+<dd><p>Builds a new map scaled to given scales.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mask_imposer.imposer.mask_pointers.PointerMap.updated_points">
+<span class="sig-name descname"><span class="pre">updated_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#mask_imposer.imposer.mask_pointers.Pointer" title="mask_imposer.imposer.mask_pointers.Pointer"><span class="pre">mask_imposer.imposer.mask_pointers.Pointer</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mask_imposer.imposer.mask_pointers.PointerMap.updated_points" title="Permalink to this definition"></a></dt>
+<dd><p>Scales all points by appropriate scales.</p>
+<dl class="simple">
+<dt>:returns</dt><dd><p>a new map of points (does not affect object values)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mask_imposer.imposer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mask_imposer.imposer" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Piotr Popis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

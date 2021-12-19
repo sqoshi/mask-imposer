@@ -1,9 +1,9 @@
 import sys
+from logging import Logger
 from os import listdir
 from os.path import isdir, join
 from typing import List
 
-from mask_imposer.colored_logger import ColoredLogger
 from mask_imposer.definitions import ImageFormat
 
 
@@ -15,7 +15,7 @@ class Inspector:
     - Inform about unrecognized image format
     """
 
-    def __init__(self, logger: ColoredLogger):
+    def __init__(self, logger: Logger):
         self._logger = logger
         self._images: List[str] = []
 
@@ -28,7 +28,9 @@ class Inspector:
         if not all_files:
             self._logger.critical(f"{path} is empty.")
             sys.exit()
-        return [join(path, f) for f in listdir(path) if ImageFormat.is_image(join(path, f))]
+        return [
+            join(path, f) for f in listdir(path) if ImageFormat.is_image(join(path, f))
+        ]
 
     def get_images(self) -> List[str]:
         return self._images

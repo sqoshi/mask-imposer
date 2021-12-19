@@ -11,7 +11,7 @@ import mask_imposer
 def sorted_by_fn(directory) -> List[str]:
     return sorted(
         [os.path.join(directory, f) for f in os.listdir(directory)],
-        key=lambda x: Path(x).name
+        key=lambda x: Path(x).name,
     )
 
 
@@ -27,7 +27,7 @@ class PythonPackageTestCase(TestCase):
             "mask_imposer",
             "bundled",
             "set_01",
-            "mask_image.png"
+            "mask_image.png",
         )
         self.imp = mask_imposer.MaskImposer()
 
@@ -62,6 +62,8 @@ class PythonPackageTestCase(TestCase):
         self.imp.impose_mask((cv2.imread(self.test_img_path), "fake_mask"), show=True)
 
     def test_should_imposing_results_be_same_for_path_and_numpy_array_way(self):
-        m1 = self.imp.impose_mask((cv2.imread(self.test_img_path), "fake_mask"), show=False)
+        m1 = self.imp.impose_mask(
+            (cv2.imread(self.test_img_path), "fake_mask"), show=False
+        )
         m2 = self.imp.impose_mask(self.test_img_path, show=False)
         assert (m1 == m2).all()
